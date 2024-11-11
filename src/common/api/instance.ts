@@ -5,7 +5,7 @@ import { deleteAuthTokens, getAuthTokens, setAuthTokens } from '@common/utils';
 import { AuthServices } from './services/auth';
 
 const apiInstance = axios.create({
-  baseURL: import.meta.env.VITE_SERVER_API_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
