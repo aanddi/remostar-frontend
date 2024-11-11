@@ -16,3 +16,5 @@ export { default as InputNumber } from './Form/InputNumber';
 export { default as InputOtp } from './Form/InputOtp';
 export { default as InputPassword } from './Form/InputPassword';
 export { default as Select } from './Form/Select';
+
+export { default as Skeleton } from './Skeletons/Base';

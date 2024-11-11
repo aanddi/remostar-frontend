@@ -1,3 +1,5 @@
+@import '/src/styles/variables.scss';
+
 .load {
   width: 100vw;
   height: 100vh;
@@ -7,4 +9,8 @@
   justify-content: center;
   align-items: center;
   gap: 32px;
+
+  .icon {
+    color: $primary;
+  }
 }

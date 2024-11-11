@@ -18,6 +18,9 @@
   "plugins": ["prettier"],
   "rules": {
     "no-console": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
     "react/no-unused-prop-types": "off",
     "react/function-component-definition": "off",
     "@typescript-eslint/indent": "off",
@@ -28,7 +31,7 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": true
+        "devDependencies": false
       }
     ],
     "react/jsx-props-no-spreading": "off",

@@ -1,38 +1,30 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useCallback, useEffect } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
+
+import { Skeleton } from '@components';
 
 import { ContractorsCard, Ribbon, Search } from '@common/components';
 import { useModal } from '@common/hooks';
 
-import PopularContractors from './components/PopularContractors';
+import { Empty } from 'antd';
+
 import FilterModal from './components/modal/Filter';
 
 import styles from './SearchContractors.module.scss';
+import { useRibbonContractor } from './api';
 import { sortOptions } from './constans';
-import responseGetContarctors from './mock';
-import FilterParams from './type';
 
 const SearchContractors = () => {
   const location = useLocation();
+  const [params] = useSearchParams();
 
   const { isOpenModal, handleOpenModal, handleCloseModal } = useModal();
 
-  const [totalCountFilter, setTotalCountFilter] = useState<number>(0);
-
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-
-    const queryTags = queryParams.get(FilterParams.TAGS);
-    const querySubjects = queryParams.get(FilterParams.SUBJECTS);
-    const queryAbout = queryParams.get(FilterParams.ABOUT);
-
-    const total =
-      (queryTags?.split(',')?.length ?? 0) +
-      (querySubjects?.split(',')?.length ?? 0) +
-      (queryAbout?.split(',')?.length ?? 0);
-
-    setTotalCountFilter(total);
-  }, [location, isOpenModal]);
+  const {
+    data: dataRibbon,
+    isFetching: isFetchingRibbon,
+    refetch,
+  } = useRibbonContractor(params as any);
 
   const handleSearch = useCallback((data: any) => {
     console.log(data);
@@ -42,31 +34,40 @@ const SearchContractors = () => {
     console.log(value);
   }, []);
 
+  useEffect(() => {
+    refetch();
+  }, [location, refetch]);
+
   return (
     <div className={styles.contartors}>
       <div className="container">
-        <Search
-          title="Поиск подрядчиков"
-          onSearch={handleSearch}
-          onOpenFilter={handleOpenModal}
-          totalCountFilter={totalCountFilter}
-        />
+        <Search title="Поиск подрядчиков" onSearch={handleSearch} onOpenFilter={handleOpenModal} />
       </div>
-      <Ribbon
-        pagination
-        sortOptions={sortOptions}
-        onSorting={handleSort}
-        totalPage={responseGetContarctors.totalPage}
-        listCount={responseGetContarctors.countItems}
-        classNameList={styles.listConractors}
-      >
-        <div className={styles.contractors}>
-          {responseGetContarctors.contartors.map((contartor) => {
-            return <ContractorsCard key={contartor.id} data={contartor} />;
-          })}
-        </div>
-        <PopularContractors contractors={responseGetContarctors.popularContartors} />
-      </Ribbon>
+      {!isFetchingRibbon && !dataRibbon ? (
+        <Empty description="Подрядчики не найдены" />
+      ) : (
+        <Ribbon
+          pagination
+          sortOptions={sortOptions}
+          onSorting={handleSort}
+          totalPage={dataRibbon?.pages}
+          perPage={dataRibbon?.page_per}
+          listCount={dataRibbon?.found}
+          classNameList={styles.listConractors}
+        >
+          <div className={styles.contractors}>
+            {isFetchingRibbon &&
+              [...Array(3)].map((_, index) => {
+                // eslint-disable-next-line react/no-array-index-key
+                return <Skeleton key={index} width="100%" height="300px" />;
+              })}
+
+            {dataRibbon?.items.map((item: any) => {
+              return <ContractorsCard key={item.id} data={item} />;
+            })}
+          </div>
+        </Ribbon>
+      )}
       <FilterModal open={isOpenModal} onCancel={handleCloseModal} />
     </div>
   );

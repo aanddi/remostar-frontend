@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { deleteAuthTokens, getAuthTokens, setAuthTokens } from '@common/utils';
 
-import AuthServices from '../services/auth';
+import { AuthServices } from './services/auth';
 
 const apiInstance = axios.create({
   baseURL: import.meta.env.VITE_SERVER_API_URL,

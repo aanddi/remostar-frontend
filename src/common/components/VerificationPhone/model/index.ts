@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { Dispatch, SetStateAction } from 'react';
 
-import AuthServices from '@common/api/services/auth';
+import { AuthServices } from '@common/api/services/auth';
 import { ILoginPhone } from '@common/api/services/auth/types/login.type';
 import {
   IOtpGenerate,
@@ -14,9 +14,7 @@ const useOtpGenerate = (
   typeVerification: 'login' | 'register',
 ) => {
   return useMutation({
-    mutationFn: async (data: IOtpGenerate) => {
-      return AuthServices.otpGenerate(data, typeVerification);
-    },
+    mutationFn: async (data: IOtpGenerate) => AuthServices.otpGenerate(data, typeVerification),
     onSuccess: (data: IOtpGenerateResponse) => {
       setResponseGenerateOtp(data);
     },
@@ -32,9 +30,7 @@ const useOtpVerification = (
   setVerificationState: Dispatch<SetStateAction<IOtpGenerateResponse | null>>,
 ) => {
   return useMutation({
-    mutationFn: async (data: IOtpVerification) => {
-      return AuthServices.otpVerification(data);
-    },
+    mutationFn: async (data: IOtpVerification) => AuthServices.otpVerification(data),
     onSuccess(data) {
       handleVerification(data);
       setVerificationState(null);

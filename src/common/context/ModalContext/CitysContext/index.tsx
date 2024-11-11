@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, createContext, useMemo } from 'react';
+import { PropsWithChildren, createContext, useMemo } from 'react';
 
 import { CitysModal } from '@common/components';
 import { useModal } from '@common/hooks';

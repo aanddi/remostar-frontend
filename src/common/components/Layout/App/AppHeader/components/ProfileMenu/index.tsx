@@ -2,7 +2,6 @@ import { Heart, MessageCircle } from 'lucide-react';
 import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { Roles, RolesEmployee } from '@common/api/services/auth/types/user.type';
 import { useAppDispatch, useAuth, useRoles } from '@common/hooks';
 
 import { logoutUser } from '@store/slices/user.slice';
@@ -23,7 +22,7 @@ const ProfileMenu = ({ openModal, handleOpenModal, handleCloseModal }: IProfileM
   const dispatch = useAppDispatch();
 
   const user = useAuth();
-  const { userRole, employeeRole } = useRoles();
+  const { isAdmin, isEmployee, isOwner, userRole, employeeRole } = useRoles();
 
   const handleLogoutUser = () => {
     dispatch(logoutUser());
@@ -81,7 +80,7 @@ const ProfileMenu = ({ openModal, handleOpenModal, handleCloseModal }: IProfileM
             <Link to="/profile" className={styles.item}>
               Мой профиль
             </Link>
-            {employeeRole?.roleName === RolesEmployee.Admin && (
+            {isAdmin && (
               <>
                 <Link to="/company" className={styles.item}>
                   Моя компания
@@ -91,12 +90,12 @@ const ProfileMenu = ({ openModal, handleOpenModal, handleCloseModal }: IProfileM
                 </Link>
               </>
             )}
-            {userRole?.roleName === Roles.Employee && (
+            {isEmployee && (
               <Link to={`/contractor/${user?.employee?.contractorId}`} className={styles.item}>
                 Страница подрядчика
               </Link>
             )}
-            {userRole?.roleName === Roles.Owner && (
+            {isOwner && (
               <Link to="/announcements" className={styles.item}>
                 Мои объявления
               </Link>

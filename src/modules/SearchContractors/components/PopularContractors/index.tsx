@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { IPopularContractorResponse } from '@common/api/services/contractor';
+// import { Skeleton } from '@components';
 import { Verify } from '@common/components';
 
 import { Avatar, Typography } from 'antd';
@@ -7,12 +9,8 @@ import { Avatar, Typography } from 'antd';
 import styles from './PopularContractors.module.scss';
 
 interface PopularContractorsProps {
-  contractors: {
-    id: number;
-    src: string;
-    name: string;
-    verify: boolean;
-  }[];
+  contractors?: IPopularContractorResponse[];
+  loading: boolean;
 }
 
 const PopularContractors = ({ contractors }: PopularContractorsProps) => (
@@ -21,14 +19,27 @@ const PopularContractors = ({ contractors }: PopularContractorsProps) => (
       Популярные подрядчики
     </Typography.Title>
     <div className={styles.list}>
-      {contractors.map((contractor) => {
+      {/* {loading && } */}
+      {contractors?.map((contractor) => {
         return (
           <div key={contractor.id} className={styles.card}>
             <div className={styles.wrapper}>
-              <Avatar size={110} src={contractor.src} />
+              <Avatar
+                size={110}
+                src={
+                  contractor.pathLogo
+                    ? contractor.pathLogo
+                    : 'src/assets/Contractors/default-avatar.png'
+                }
+              />
               <div className={styles.name}>
-                <span>{contractor.name}</span>
-                {contractor.verify && <Verify strokeWidth={1} size={16} />}
+                <span>
+                  {contractor.name} {contractor.veryfi && <Verify strokeWidth={1} size={16} />}
+                </span>
+
+                <div className={styles.statistick}>
+                  {contractor.reviewCount} {contractor.gradeTotal}
+                </div>
               </div>
             </div>
           </div>

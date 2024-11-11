@@ -1,8 +1,7 @@
-import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
+import { useRegisterContactor } from '@modules/Registration/api';
 import optionType from '@modules/Registration/constans';
-import { useRegisterContactor } from '@modules/Registration/model';
 
 import { Button, Input, InputNumber, InputPhone, Select } from '@components';
 import ErrorMessage from '@components/Form/ErrorMessage';

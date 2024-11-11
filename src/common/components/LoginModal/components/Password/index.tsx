@@ -1,4 +1,3 @@
-import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { Button, InputPassword, InputPhone } from '@components';
@@ -9,7 +8,7 @@ import { useModalLogin } from '@common/hooks';
 
 import styles from './Password.module.scss';
 
-import { useLoginPassword } from '../../model';
+import { useLoginPassword } from '../../api';
 
 const PasswordLogin = () => {
   const {

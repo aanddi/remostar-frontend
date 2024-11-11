@@ -17,6 +17,7 @@ export default defineConfig({
       '@routes': path.resolve(__dirname, './src/routes'),
       '@styles': path.resolve(__dirname, './src/styles'),
       '@store': path.resolve(__dirname, './src/store'),
+      '@config': path.resolve(__dirname, './src/config'),
     },
   },
   plugins: [eslint({ cache: false }), react(), svgr(), checker({ typescript: true })],

@@ -9,6 +9,8 @@
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
 
+    "^@config",
+
     "^@modules",
     "^@components",
 
