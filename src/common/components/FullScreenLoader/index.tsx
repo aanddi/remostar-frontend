@@ -1,4 +1,4 @@
-import React from 'react';
+import { Loading } from '@common/icon';
 
 import Logo from '@assets/Logo.svg?react';
 
@@ -10,7 +10,7 @@ const FullScreenLoader = () => {
   return (
     <div className={styles.load}>
       <Logo />
-      <Spin size="large" />
+      <Spin indicator={<Loading className={styles.icon} spin />} size="large" />
     </div>
   );
 };

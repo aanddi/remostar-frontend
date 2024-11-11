@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { CitysContext } from '@common/providers/ModalProviders/CitysProvides';
+import { CitysContext } from '@common/context/ModalContext/CitysContext';
 
 const useModalCitys = () => {
   const citysContext = useContext(CitysContext);

@@ -6,7 +6,7 @@ import { useModalLogin } from '@common/hooks';
 
 import styles from './Phone.module.scss';
 
-import { useLoginPhone } from '../../model';
+import { useLoginPhone } from '../../api';
 
 const PhoneLogin = () => {
   const { handleCloseModal } = useModalLogin();

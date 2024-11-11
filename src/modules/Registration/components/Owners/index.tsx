@@ -1,7 +1,6 @@
-import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useRegisterOwner } from '@modules/Registration/model';
+import { useRegisterOwner } from '@modules/Registration/api';
 
 import { Button, Input } from '@components';
 import ErrorMessage from '@components/Form/ErrorMessage';

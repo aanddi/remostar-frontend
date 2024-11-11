@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Button } from '@components';
@@ -29,15 +29,6 @@ const AppHeader = () => {
   const [openMenuMobile, setOpenMenuMobile] = useState(false);
 
   const { isOpenModal, handleOpenModal, handleCloseModal } = useModal();
-
-  useEffect(() => {
-    if (openMenuMobile) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = 'unset';
-
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [openMenuMobile]);
 
   useEffect(() => {
     setOpenMenuMobile(false);

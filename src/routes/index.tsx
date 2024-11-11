@@ -4,7 +4,7 @@ import { useLocation, useRoutes } from 'react-router-dom';
 import { Roles, RolesEmployee } from '@common/api/services/auth/types/user.type';
 import { AppLayout, AuthLayout } from '@common/components';
 import FullScreenLoader from '@common/components/FullScreenLoader';
-import AuthProvider from '@common/providers/AuthProvider';
+import AuthProvider from '@common/providers/AuthProtectedProvider';
 
 const SearchOwnersPage = lazy(() => import('./SearchOwners'));
 const SearchContractorsPage = lazy(() => import('./SearchContractors'));

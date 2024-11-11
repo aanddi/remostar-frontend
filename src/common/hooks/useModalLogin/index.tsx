@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { LoginContext } from '@common/providers/ModalProviders/LoginProvider';
+import { LoginContext } from '@common/context/ModalContext/LoginContext';
 
 const useModalLogin = () => {
   const loginContext = useContext(LoginContext);

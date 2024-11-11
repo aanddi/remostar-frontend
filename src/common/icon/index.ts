@@ -13,3 +13,4 @@ export { default as ArrowBack } from './components/ArrowBack';
 export { default as Home } from './components/Home';
 export { default as Close } from './components/Close';
 export { default as Add } from './components/Add';
+export { default as Loading } from './components/Loading';

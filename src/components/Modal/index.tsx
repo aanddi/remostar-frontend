@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Button } from '@components';
 
 import { ModalProps, Modal as UIModal } from 'antd';
