@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { Button } from '@components';
 
+import { IContractorPortfolio } from '@common/api/services/contractor';
 import { formatNumber } from '@common/utils';
 
 import { Avatar, Descriptions, Image, Watermark } from 'antd';
@@ -12,10 +13,7 @@ import { FaUser } from 'react-icons/fa';
 
 import styles from './Card.module.scss';
 
-import IPortfolioCard from '../../type';
-
-const Card = ({ data }: { data: IPortfolioCard }) => {
-  console.log(data);
+const Card = ({ data }: { data?: IContractorPortfolio }) => {
   const [restDesc, setRestDesc] = useState(false);
   return (
     <div className={styles.card}>
@@ -29,12 +27,13 @@ const Card = ({ data }: { data: IPortfolioCard }) => {
             navigation
             modules={[Pagination, Navigation]}
           >
-            {data.gallery.map((image) => {
+            {data?.gallery?.split(',').map((image, index) => {
               return (
-                <SwiperSlide key={image.key}>
-                  <Image.PreviewGroup items={data.gallery}>
+                // eslint-disable-next-line react/no-array-index-key
+                <SwiperSlide key={index}>
+                  <Image.PreviewGroup items={data?.gallery?.split(',')}>
                     <Watermark content="Ремостар">
-                      <Image src={image.src} className={styles.galleryImage} />
+                      <Image src={image} className={styles.galleryImage} />
                     </Watermark>
                   </Image.PreviewGroup>
                 </SwiperSlide>
@@ -46,37 +45,32 @@ const Card = ({ data }: { data: IPortfolioCard }) => {
           <div className={styles.contentWrapper}>
             <div className={styles.header}>
               <div className={styles.name}>
-                {data.rooms}-комн. {data.type} {data.footage} м²
+                {data?.rooms}-комн. {data?.type} {data?.footage} м²
               </div>
-              <div className={styles.budget}>{formatNumber(data.budget)} ₽</div>
+              <div className={styles.budget}>{formatNumber(data?.budget)} ₽</div>
             </div>
             <Descriptions className={styles.info}>
-              <Descriptions.Item label="Тип объекта">{data.type}</Descriptions.Item>
-              <Descriptions.Item label="Кол-во комнат">{data.rooms}</Descriptions.Item>
-              <Descriptions.Item label="Метраж">{data.footage}</Descriptions.Item>
-              <Descriptions.Item label="Сроки"> {data.time}</Descriptions.Item>
-              <Descriptions.Item label="Категория">{data.categoryRepair}</Descriptions.Item>
+              <Descriptions.Item label="Тип объекта">{data?.type}</Descriptions.Item>
+              <Descriptions.Item label="Кол-во комнат">{data?.rooms}</Descriptions.Item>
+              <Descriptions.Item label="Метраж">{data?.footage}</Descriptions.Item>
+              <Descriptions.Item label="Сроки"> {data?.time}</Descriptions.Item>
+              <Descriptions.Item label="Категория">{data?.category}</Descriptions.Item>
             </Descriptions>
             <div className={styles.desc}>
               <div className={styles.title}>Обзор проекта:</div>
-              <div className={restDesc ? styles.fullText : styles.text}>{data.desc}</div>
+              <div className={restDesc ? styles.fullText : styles.text}>{data?.desc}</div>
               <Button className={styles.rest} type="text" onClick={() => setRestDesc(!restDesc)}>
                 {restDesc ? 'Скрыть' : 'Прочитать полностью'}
               </Button>
             </div>
           </div>
           <div className={styles.authors}>
-            {data.authors.map((author) => {
-              return (
-                <div key={author.id} className={styles.authorItem}>
-                  <Avatar size={35} icon={<FaUser />} />
-                  <div className={styles.authorInfo}>
-                    <div className={styles.name}>{author.fullName}</div>
-                    <div className={styles.role}>{author.role}</div>
-                  </div>
-                </div>
-              );
-            })}
+            <div className={styles.authorItem}>
+              <Avatar size={35} icon={<FaUser />} />
+              <div className={styles.authorInfo}>
+                <div className={styles.name}>{data?.author}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

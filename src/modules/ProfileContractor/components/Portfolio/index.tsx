@@ -1,21 +1,27 @@
-import React from 'react';
+import { Skeleton, Title } from '@components';
 
-import { Title } from '@components';
+import { IContractorPortfolio } from '@common/api/services/contractor';
+
+import { Empty } from 'antd';
 
 import Card from './components/Card';
 
 import styles from './Portfolio.module.scss';
-import mock from './mock';
 
-const Portfolio = ({ id }: { id?: string }) => {
-  console.log(id);
+const Portfolio = ({ data, loading }: { data?: IContractorPortfolio[]; loading: boolean }) => {
   return (
     <section className={styles.portfolio}>
-      <Title title="Портфолио" afterContent={mock.length} level={3} />
+      <Title title="Портфолио" afterContent={data?.length} level={3} />
       <div className={styles.ribbon}>
-        {mock.map((work) => {
+        {loading &&
+          // eslint-disable-next-line react/no-array-index-key
+          Array.from({ length: 6 }).map((_, index) => <Skeleton key={index} height="300px" />)}
+
+        {data?.map((work) => {
           return <Card key={work.id} data={work} />;
         })}
+
+        {!data?.length && !loading && <Empty description="Работы не найдены" />}
       </div>
     </section>
   );

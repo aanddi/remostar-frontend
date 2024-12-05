@@ -31,7 +31,6 @@ interface ITags {
   data: {
     id: number;
     name: string;
-    count: number;
   }[];
   activeTag: string;
   setActiveTag: (tag: string) => void;

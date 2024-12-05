@@ -1,46 +1,28 @@
 const mockReviews = {
-  // TODO: Пагинация
-  statistics: {
-    totalGrade: 4.1,
-    totalCount: 12,
-    qualityGrade: 3.3, // Качество работы
-    materialsGrade: 4, // Качество материалов
-    priceGrade: 4.4, // Стоимость
-    experienceGrade: 2.4, // Профессионализм и опыт
-    deadlinesGrade: 3.4, // Соблюдение сроков
-    communicationGrade: 2.4, // Коммуникация и отзывчивость
-  },
-
   tags: [
     {
       id: 1,
       name: 'Капитальный ремонт',
-      count: 3,
     },
     {
       id: 2,
       name: 'Отделочные работы',
-      count: 10,
     },
     {
       id: 3,
       name: 'Косметический ремонт',
-      count: 6,
     },
     {
       id: 4,
       name: 'Электрика',
-      count: 3,
     },
     {
       id: 5,
       name: 'Сантехника',
-      count: 3,
     },
     {
       id: 6,
       name: 'Другие услуги',
-      count: 10,
     },
   ],
 

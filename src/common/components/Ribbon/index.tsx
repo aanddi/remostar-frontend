@@ -71,7 +71,7 @@ const Ribbon = ({
           <Pagination
             current={currentPage}
             defaultCurrent={currentPage}
-            total={totalPage}
+            total={totalPage! * perPage!}
             showSizeChanger={false}
             pageSize={perPage}
             defaultPageSize={10}

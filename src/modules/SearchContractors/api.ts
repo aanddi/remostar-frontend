@@ -11,11 +11,4 @@ const useRibbonContractor = (params: IRibbonContractorQuery) => {
   });
 };
 
-const usePopularContractor = () => {
-  return useQuery({
-    queryKey: [ApiTags.GET_CONTRACTOR_POPULAR],
-    queryFn: async () => ContractorsServices.getPopularContractors(),
-  });
-};
-
-export { useRibbonContractor, usePopularContractor };
+export { useRibbonContractor };

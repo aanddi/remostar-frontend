@@ -1,22 +1,27 @@
-import React from 'react';
+import { Skeleton, Title } from '@components';
 
-import { Title } from '@components';
+import { IContractorServices } from '@common/api/services/contractor';
+
+import { Empty } from 'antd';
 
 import ServiceItem from './components/ServiceItem';
 
 import styles from './Services.module.scss';
-import mock from './mock';
 
-const Services = ({ id }: { id?: string }) => {
-  console.log(id);
-
+const Services = ({ data, loading }: { data?: IContractorServices[]; loading: boolean }) => {
   return (
     <section className={styles.services}>
-      <Title title="Услуги" afterContent={mock.countServices} level={3} />
+      <Title title="Услуги" afterContent={data?.length} level={3} />
       <div className={styles.rabbit}>
-        {mock.services.map((item) => {
-          return <ServiceItem service={item} />;
+        {loading &&
+          // eslint-disable-next-line react/no-array-index-key
+          Array.from({ length: 6 }).map((_, index) => <Skeleton key={index} height="100px" />)}
+
+        {data?.map((item) => {
+          return <ServiceItem key={item.id} service={item} />;
         })}
+
+        {!data?.length && !loading && <Empty description="Услуги не найдены" />}
       </div>
     </section>
   );

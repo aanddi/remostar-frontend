@@ -1,40 +1,47 @@
-import React from 'react';
+import { Breadcrumb, Button, Image, Skeleton } from '@components';
 
-import { Breadcrumb, Button, Image } from '@components';
-
+import { IContractorInfo } from '@common/api/services/contractor';
 import { Verify } from '@common/components';
 import { Add } from '@common/icon';
+import { formatDate } from '@common/utils';
 
 import styles from './Header.module.scss';
-import mock from './mock';
 
-const itemsBreadcrumb = [
-  {
-    title: 'Поиск подрядчика',
-    href: '/contractors',
-  },
-  {
-    title: mock.nameCompany,
-  },
-];
+const Header = ({ data, loading }: { data?: IContractorInfo; loading: boolean }) => {
+  const itemsBreadcrumb = [
+    {
+      title: 'Поиск подрядчика',
+      href: '/contractors',
+    },
+    {
+      title: data?.name ?? 'Подрядчик',
+    },
+  ];
 
-const Header = ({ id }: { id?: string }) => {
-  console.log(id);
   return (
     <div className={styles.header}>
       <Breadcrumb items={itemsBreadcrumb} />
       <div className={styles.card}>
         <div className={styles.wrapper}>
           <div className={styles.content}>
-            <div className={styles.name}>
-              {mock.nameCompany}
-              {mock.verify && <Verify />}
-            </div>
-
-            <div className={styles.info}>
-              <div className={styles.type}> {mock.typeCompany}</div>
-              <div className={styles.time}>{mock.timePlatform} на платформе</div>
-            </div>
+            {loading ? (
+              <Skeleton height="30px" />
+            ) : (
+              <div className={styles.name}>
+                {data?.name}
+                {data?.veryfi && <Verify />}
+              </div>
+            )}
+            {loading ? (
+              <Skeleton height="30px" />
+            ) : (
+              <div className={styles.info}>
+                <div className={styles.type}> {data?.typeCompany}</div>
+                <div className={styles.time}>
+                  Зарегистрирован - {formatDate(data?.createdAt, 'MMMM YYYY')}
+                </div>
+              </div>
+            )}
             <div className={styles.actions}>
               <Button type="primary">Написать</Button>
               <Button className={styles.button} icon={<Add size={18} />}>
@@ -42,11 +49,16 @@ const Header = ({ id }: { id?: string }) => {
               </Button>
             </div>
           </div>
-          {mock.logo && (
-            <div className={styles.logo}>
-              <Image preview={false} src={mock.logo} width={150} />
-            </div>
-          )}
+          <div className={styles.logo}>
+            <Image
+              preview={false}
+              src={
+                data?.pathLogo ??
+                'https://static.tildacdn.com/tild3865-3065-4436-a138-323766306537/BuildersLabourer_Ico.png'
+              }
+              width={80}
+            />
+          </div>
         </div>
       </div>
     </div>

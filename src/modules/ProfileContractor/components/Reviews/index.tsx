@@ -1,39 +1,39 @@
-import React, { useState } from 'react';
+import { Button, Title } from '@components';
 
-import { Button, Select, Title } from '@components';
-
+import { IContractorReviews } from '@common/api/services/contractor';
 import { Add } from '@common/icon';
+
+import { Empty, Skeleton } from 'antd';
 
 import Card from './components/Card';
 import Statistics from './components/Statistics';
-import Tags from './components/Tags';
 
 import styles from './Reviews.module.scss';
-import sortItems from './constans';
-import mock from './mock';
 
-const Reviews = ({ id }: { id?: string }) => {
-  console.log(id);
-  const [activeTag, setActiveTag] = useState('');
-
+const Reviews = ({ data, loading }: { data?: IContractorReviews; loading: boolean }) => {
   return (
     <section className={styles.reviews}>
       <div className={styles.header}>
-        <Title title="Отзывы" afterContent={mock.statistics.totalCount} level={3} />
+        <Title title="Отзывы" afterContent={data?.items.length} level={3} />
         <Button type="primary" icon={<Add size={18} />}>
           Написать отзыв
         </Button>
       </div>
-      <Statistics data={mock.statistics} />
-      <div className={styles.content}>
-        <Tags data={mock.tags} activeTag={activeTag} setActiveTag={setActiveTag} />
-        <Select options={sortItems} defaultValue={sortItems[0].value} className={styles.sort} />
-        <div className={styles.ribbon}>
-          {mock.reviews.map((review) => {
-            return <Card key={review.id} data={review} />;
-          })}
-        </div>
-      </div>
+      {loading ? (
+        <Skeleton active />
+      ) : (
+        <>
+          <Statistics data={data?.statistics!} />
+          <div className={styles.content}>
+            <div className={styles.ribbon}>
+              {data?.items.map((review) => {
+                return <Card key={review.id} data={review} />;
+              })}
+              {!data?.items?.length && !loading && <Empty description="Отзывы не найдены" />}
+            </div>
+          </div>
+        </>
+      )}
     </section>
   );
 };
