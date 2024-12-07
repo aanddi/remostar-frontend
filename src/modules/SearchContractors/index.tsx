@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { Skeleton } from '@components';
@@ -26,14 +26,6 @@ const SearchContractors = () => {
     refetch,
   } = useRibbonContractor(params as any);
 
-  const handleSearch = useCallback((data: any) => {
-    console.log(data);
-  }, []);
-
-  const handleSort = useCallback((value: string) => {
-    console.log(value);
-  }, []);
-
   useEffect(() => {
     refetch();
   }, [location, refetch]);
@@ -41,15 +33,14 @@ const SearchContractors = () => {
   return (
     <div className={styles.contartors}>
       <div className="container">
-        <Search title="Поиск подрядчиков" onSearch={handleSearch} onOpenFilter={handleOpenModal} />
+        <Search title="Поиск подрядчиков" onOpenFilter={handleOpenModal} />
       </div>
-      {!isFetchingRibbon && !dataRibbon ? (
+      {!isFetchingRibbon && !dataRibbon?.items.length ? (
         <Empty description="Подрядчики не найдены" />
       ) : (
         <Ribbon
           pagination
           sortOptions={sortOptions}
-          onSorting={handleSort}
           totalPage={dataRibbon?.pages}
           perPage={dataRibbon?.page_per}
           listCount={dataRibbon?.found}

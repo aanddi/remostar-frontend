@@ -1,4 +1,3 @@
-import React, { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Pagination } from '@components';
@@ -18,15 +17,7 @@ const Ribbon = ({
   totalPage,
   perPage,
   sortOptions,
-  onSorting,
 }: IribbonProps) => {
-  const handleSort = useCallback(
-    (value: string) => {
-      onSorting?.(value);
-    },
-    [onSorting],
-  );
-
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -47,6 +38,16 @@ const Ribbon = ({
     });
   };
 
+  const urlQueryParams = new URLSearchParams(location.search);
+
+  const handleChangeSortItem = (value: string) => {
+    urlQueryParams.set('sort', value);
+    navigate({
+      pathname: location.pathname,
+      search: urlQueryParams.toString(),
+    });
+  };
+
   return (
     <section className={styles.ribbon}>
       <div className="container">
@@ -61,20 +62,18 @@ const Ribbon = ({
                 options={sortOptions}
                 className={styles.selectSort}
                 suffixIcon={<ArrowsSort size={20} className={styles.icon} />}
-                onChange={(value) => handleSort(value as unknown as string)}
+                onChange={(value) => handleChangeSortItem(value as unknown as string)}
               />
             )}
           </div>
           <div className={`${classNameList}`}>{children}</div>
         </div>
-        {pagination && (
+        {pagination && !!listCount && (
           <Pagination
             current={currentPage}
-            defaultCurrent={currentPage}
-            total={totalPage! * perPage!}
+            total={totalPage! * perPage! || 1}
             showSizeChanger={false}
             pageSize={perPage}
-            defaultPageSize={10}
             onChange={handlePageChange}
           />
         )}

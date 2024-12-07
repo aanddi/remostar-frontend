@@ -4,7 +4,7 @@ import { Title } from '@components';
 
 import styles from './Description.module.scss';
 
-const Description = ({ data }: { data: string }) => {
+const Description = ({ data }: { data?: string }) => {
   return (
     <div className={styles.desc}>
       <Title title="Описание от собственника" level={4} />

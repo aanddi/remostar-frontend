@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Button, Input } from '@components';
 
@@ -13,8 +14,12 @@ import { FiSearch } from 'react-icons/fi';
 import styles from './Seacr.module.scss';
 import { ISearch, ISearchProps } from './type';
 
-const Search = ({ title, onSearch, onOpenFilter, totalCountFilter }: ISearchProps) => {
-  const { control, getValues } = useForm<ISearch>();
+const Search = ({ title, onOpenFilter, totalCountFilter }: ISearchProps) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const urlQueryParams = new URLSearchParams(location.search);
+
+  const { control, getValues, reset } = useForm<ISearch>();
 
   const { handleOpenModal: handleModalCity } = useModalCitys();
 
@@ -24,9 +29,25 @@ const Search = ({ title, onSearch, onOpenFilter, totalCountFilter }: ISearchProp
     onOpenFilter?.();
   }, [onOpenFilter]);
 
-  const handleSearch = useCallback(() => {
-    onSearch(getValues());
-  }, [getValues, onSearch]);
+  const handleSearch = () => {
+    const search = getValues().searchField;
+
+    if (search) urlQueryParams.set('search', getValues().searchField);
+    urlQueryParams.set('region', city);
+
+    navigate({
+      pathname: location.pathname,
+      search: urlQueryParams.toString(),
+    });
+  };
+
+  const handleReset = () => {
+    reset();
+    navigate({
+      pathname: location.pathname,
+      search: '',
+    });
+  };
 
   return (
     <section className={styles.search}>
@@ -64,6 +85,9 @@ const Search = ({ title, onSearch, onOpenFilter, totalCountFilter }: ISearchProp
                 </Button>
               </Badge>
             )}
+            <Button type="default" size="large" onClick={handleReset}>
+              Сбросить
+            </Button>
             <Button type="primary" size="large" onClick={handleSearch} className={styles.submit}>
               Найти
             </Button>

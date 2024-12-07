@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Swiper as SwiperType } from 'swiper';
 import { FreeMode, Navigation, Pagination, Thumbs } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -11,10 +11,7 @@ import styles from './GalleryThumbs.module.scss';
 import './GalleryThumbs.scss';
 
 interface IGalleryProps {
-  data: {
-    key: number;
-    src: string;
-  }[];
+  data: string[];
   watermark?: boolean;
   watermarkText?: string;
   className?: string;
@@ -39,16 +36,17 @@ const GalleryThumbs = ({
         thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
         modules={[FreeMode, Navigation, Thumbs, Pagination]}
       >
-        {data.map((item) => {
+        {data.map((item, index) => {
           return (
-            <SwiperSlide key={item.key} className={styles.viewGalleryItem}>
+            // eslint-disable-next-line react/no-array-index-key
+            <SwiperSlide key={index} className={styles.viewGalleryItem}>
               <Image.PreviewGroup items={data}>
                 {watermark ? (
                   <Watermark content={watermarkText}>
-                    <ImageCustom className={styles.viewGalleryImage} src={item.src} />
+                    <ImageCustom className={styles.viewGalleryImage} src={item} />
                   </Watermark>
                 ) : (
-                  <ImageCustom className={styles.viewGalleryImage} src={item.src} />
+                  <ImageCustom className={styles.viewGalleryImage} src={item} />
                 )}
               </Image.PreviewGroup>
             </SwiperSlide>
@@ -85,10 +83,11 @@ const GalleryThumbs = ({
           },
         }}
       >
-        {data.map((item) => {
+        {data.map((item, index) => {
           return (
-            <SwiperSlide key={item.key}>
-              <ImageCustom className={styles.galleryThumbsImage} preview={false} src={item.src} />
+            // eslint-disable-next-line react/no-array-index-key
+            <SwiperSlide key={index}>
+              <ImageCustom className={styles.galleryThumbsImage} preview={false} src={item} />
             </SwiperSlide>
           );
         })}

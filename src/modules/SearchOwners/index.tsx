@@ -1,42 +1,54 @@
-import React, { useCallback } from 'react';
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-import { AnnouncementCard, Ribbon, Search } from '@common/components';
+import { Skeleton } from '@components';
+
+import { useGetTenders } from '@common/api/services/tenders/hooks';
+import { Ribbon, Search, TenderCard } from '@common/components';
 import { useModal } from '@common/hooks';
+
+import { Empty } from 'antd';
 
 import FilterModal from './components/modal/Filter';
 
 import styles from './SearchOwners.module.scss';
-import sortOptions from './constans';
-import responseGetAnnouncements from './mock';
 
 const SearchOwners = () => {
+  const [params] = useSearchParams();
   const { isOpenModal, handleOpenModal, handleCloseModal } = useModal();
 
-  const handleSearch = useCallback((data: any) => {
-    console.log(data);
-  }, []);
+  const { data: tenders, refetch, isFetching } = useGetTenders(params.toString());
 
-  const handleSorting = useCallback((value: string) => {
-    console.log(value);
-  }, []);
+  useEffect(() => {
+    refetch();
+  }, [params, refetch]);
 
   return (
     <div>
       <div className="container">
-        <Search title="Поиск собственника" onOpenFilter={handleOpenModal} onSearch={handleSearch} />
+        <Search title="Поиск тендеров" onOpenFilter={handleOpenModal} />
       </div>
-      <Ribbon
-        pagination
-        sortOptions={sortOptions}
-        onSorting={handleSorting}
-        totalPage={responseGetAnnouncements.totalPage}
-        listCount={responseGetAnnouncements.countItems}
-        classNameList={styles.listAnnouncements}
-      >
-        {responseGetAnnouncements.announcements.map((announcement) => {
-          return <AnnouncementCard key={announcement.id} data={announcement} />;
-        })}
-      </Ribbon>
+      {!isFetching && !tenders?.items.length ? (
+        <Empty description="Тендеры не найдены" />
+      ) : (
+        <Ribbon
+          pagination
+          totalPage={tenders?.pages}
+          perPage={tenders?.page_per}
+          listCount={tenders?.found}
+          classNameList={styles.listAnnouncements}
+        >
+          {isFetching &&
+            [...Array(3)].map((_, index) => {
+              // eslint-disable-next-line react/no-array-index-key
+              return <Skeleton key={index} width="100%" height="300px" />;
+            })}
+
+          {tenders?.items?.map((tender) => {
+            return <TenderCard key={tender.id} data={tender} />;
+          })}
+        </Ribbon>
+      )}
       <FilterModal open={isOpenModal} onCancel={handleCloseModal} />
     </div>
   );

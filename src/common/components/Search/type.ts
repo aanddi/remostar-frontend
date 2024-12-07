@@ -1,7 +1,6 @@
 interface ISearchProps {
   title: string;
   totalCountFilter?: number;
-  onSearch: (data: ISearch) => void;
   onOpenFilter?: () => void;
 }
 

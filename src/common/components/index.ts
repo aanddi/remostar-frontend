@@ -5,7 +5,7 @@ export { default as AppFooter } from './Layout/App/AppFooter';
 export { default as AppHeader } from './Layout/App/AppHeader';
 
 export { default as ContractorsCard } from './ContractorsCard';
-export { default as AnnouncementCard } from './AnnouncementCard';
+export { default as TenderCard } from './TenderCard';
 
 export { default as Search } from './Search';
 export { default as Ribbon } from './Ribbon';

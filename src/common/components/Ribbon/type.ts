@@ -10,7 +10,6 @@ interface IribbonProps {
   totalPage?: number;
   perPage?: number;
   sortOptions?: DefaultOptionType[];
-  onSorting?: (value: string) => void;
 }
 
 export default IribbonProps;

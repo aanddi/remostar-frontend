@@ -1,20 +1,19 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { Button, Image } from '@components';
 
-import { Verify } from '@common/components';
+import { ITendersRibbon } from '@common/api/services/tenders';
 import { Heart, Map, MessageReport } from '@common/icon';
 import { formatNumber } from '@common/utils';
 
 import { Image as AntdImage, Avatar, Tag, Tooltip, Watermark } from 'antd';
 
 import styles from './AnnouncementCard.module.scss';
-import IAnnouncementCardProps from './type';
 
-const AnnouncementCard = ({ data }: IAnnouncementCardProps) => {
+const AnnouncementCard = ({ data }: { data: ITendersRibbon }) => {
   const navigate = useNavigate();
   const card = useMemo(
     () => (
@@ -39,12 +38,13 @@ const AnnouncementCard = ({ data }: IAnnouncementCardProps) => {
               navigation
               modules={[Pagination, Navigation]}
             >
-              {data.gallery.map((image) => {
+              {data.gallery.split(',').map((image, index) => {
                 return (
-                  <SwiperSlide key={image.key}>
-                    <AntdImage.PreviewGroup items={data.gallery}>
+                  // eslint-disable-next-line react/no-array-index-key
+                  <SwiperSlide key={index}>
+                    <AntdImage.PreviewGroup items={data.gallery.split(',')}>
                       <Watermark content="Ремостар">
-                        <Image src={image.src} className={styles.galleryItem} />
+                        <Image src={image} className={styles.galleryItem} />
                       </Watermark>
                     </AntdImage.PreviewGroup>
                   </SwiperSlide>
@@ -62,15 +62,16 @@ const AnnouncementCard = ({ data }: IAnnouncementCardProps) => {
               <div className={styles.info}>
                 <div className={styles.item}>
                   <Map size={15} />
-                  {data?.adress}
+                  {data?.address}
                 </div>
               </div>
               <div className={styles.desc}>{data?.desc}</div>
               <div className={styles.tags}>
-                {data?.tags.map((tag) => {
+                {data?.tags.split(',').map((tag, index) => {
                   return (
-                    <Tag key={tag.id} bordered={false} color="blue">
-                      {tag.name}
+                    // eslint-disable-next-line react/no-array-index-key
+                    <Tag key={index} bordered={false} color="blue">
+                      {tag}
                     </Tag>
                   );
                 })}
@@ -80,13 +81,7 @@ const AnnouncementCard = ({ data }: IAnnouncementCardProps) => {
               <div className={styles.user}>
                 <Avatar size={40} src="src/assets/User/default-avatar.png" />
                 <div className={styles.userAbout}>
-                  <div className={styles.name}>
-                    {data?.user.name}
-                    {data?.user.verify && (
-                      <Verify textTooltip="Проверенный пользователь" strokeWidth={1} size={16} />
-                    )}
-                  </div>
-                  <span>{data?.user.type}</span>
+                  <div className={styles.name}>{data?.user.name}</div>
                 </div>
               </div>
               <div className={styles.actions}>
