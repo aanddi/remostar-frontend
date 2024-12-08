@@ -3,6 +3,9 @@ enum ApiTags {
   GET_CONTRACTOR_PROFILE = 'get_contractor_profile',
   GET_TENDERS_RIBBON = 'get_tenders_ribbon',
   GET_TENDER = 'get_tender',
+  GET_USER_PROFILE = 'get_user_profile',
+
+  EDIT_PROFILE_USER = 'edit_profile_user',
 }
 
 export default ApiTags;
