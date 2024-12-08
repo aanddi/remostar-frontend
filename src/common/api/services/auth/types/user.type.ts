@@ -1,7 +1,7 @@
 import ITokens from './tokens.type';
 
 enum Roles {
-  Owner = 'OWNERS',
+  Owner = 'OWNER',
   Employee = 'EMPLOYEE',
 }
 

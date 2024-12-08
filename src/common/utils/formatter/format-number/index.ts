@@ -3,4 +3,10 @@ const formatNumber = (price?: number) => {
   return new Intl.NumberFormat('ru-RU').format(price);
 };
 
-export default formatNumber;
+const parserNumber = (value?: string) => {
+  if (!value) return undefined;
+
+  return parseInt(value.replace(/\s?|(,*)/g, ''), 10);
+};
+
+export { formatNumber, parserNumber };

@@ -137,7 +137,7 @@ const Router = () => {
       ),
     },
     {
-      path: '/announcements',
+      path: '/my-tenders',
       element: (
         <AppLayout>
           <AuthProvider protectionUser={[Roles.Employee]}>

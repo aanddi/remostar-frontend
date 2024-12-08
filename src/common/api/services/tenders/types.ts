@@ -3,7 +3,6 @@ interface ITendersRibbon {
   name: string;
   address: string;
   desc: string;
-  tags: string;
   budget: number;
   gallery: string;
   user: {
@@ -32,7 +31,6 @@ interface ITender {
   address: string;
   desc: string;
   gallery: string;
-  tags: string;
   rooms: number;
   type: string;
   footage: number;
@@ -48,4 +46,19 @@ interface ITender {
   };
 }
 
-export type { ITendersRibbon, IRibbonTendersResponse, ITender };
+interface ITenderActions {
+  name: string;
+  budget: number;
+  address: string;
+  desc: string;
+  gallery: string;
+  rooms: number;
+  type: string;
+  footage: number;
+  squareKitchen: number;
+  squareLived: number;
+  floor: string;
+  finishing: string;
+}
+
+export type { ITendersRibbon, IRibbonTendersResponse, ITender, ITenderActions };

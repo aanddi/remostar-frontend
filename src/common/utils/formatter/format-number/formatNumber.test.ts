@@ -1,4 +1,4 @@
-import formatNumber from './index';
+import { formatNumber } from './index';
 
 describe('formatNumber', () => {
   test('Корректное значение', () => {

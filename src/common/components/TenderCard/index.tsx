@@ -9,7 +9,7 @@ import { ITendersRibbon } from '@common/api/services/tenders';
 import { Heart, Map, MessageReport } from '@common/icon';
 import { formatNumber } from '@common/utils';
 
-import { Image as AntdImage, Avatar, Tag, Tooltip, Watermark } from 'antd';
+import { Image as AntdImage, Avatar, Tooltip, Watermark } from 'antd';
 
 import styles from './AnnouncementCard.module.scss';
 
@@ -66,16 +66,6 @@ const AnnouncementCard = ({ data }: { data: ITendersRibbon }) => {
                 </div>
               </div>
               <div className={styles.desc}>{data?.desc}</div>
-              <div className={styles.tags}>
-                {data?.tags.split(',').map((tag, index) => {
-                  return (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <Tag key={index} bordered={false} color="blue">
-                      {tag}
-                    </Tag>
-                  );
-                })}
-              </div>
             </div>
             <div className={styles.footer}>
               <div className={styles.user}>
