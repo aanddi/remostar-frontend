@@ -1,12 +1,12 @@
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { useRegisterContactor } from '@modules/Registration/api';
-import optionType from '@modules/Registration/constans';
 
 import { Button, Input, InputNumber, InputPhone, Select } from '@components';
 import ErrorMessage from '@components/Form/ErrorMessage';
 
 import { IRegisterContractors } from '@common/api/services/auth/types/register.type';
+import { optionTypeCompany } from '@common/config/dictionary';
 
 import { IoIosArrowBack } from 'react-icons/io';
 
@@ -85,7 +85,7 @@ const ContractorForm = ({ setStepRegister }: IRegisterFormProps) => {
               isRequired
               {...field}
               error={errors.typeCompany?.message}
-              options={optionType}
+              options={optionTypeCompany}
             />
           )}
         />

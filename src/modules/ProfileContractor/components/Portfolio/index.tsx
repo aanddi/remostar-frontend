@@ -1,10 +1,9 @@
 import { Skeleton, Title } from '@components';
 
 import { IContractorPortfolio } from '@common/api/services/contractor';
+import { PortfolioCard } from '@common/components';
 
 import { Empty } from 'antd';
-
-import Card from './components/Card';
 
 import styles from './Portfolio.module.scss';
 
@@ -18,7 +17,7 @@ const Portfolio = ({ data, loading }: { data?: IContractorPortfolio[]; loading: 
           Array.from({ length: 6 }).map((_, index) => <Skeleton key={index} height="300px" />)}
 
         {data?.map((work) => {
-          return <Card key={work.id} data={work} />;
+          return <PortfolioCard key={work.id} data={work} />;
         })}
 
         {!data?.length && !loading && <Empty description="Работы не найдены" />}

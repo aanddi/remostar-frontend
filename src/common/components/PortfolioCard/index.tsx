@@ -7,13 +7,15 @@ import { Button } from '@components';
 import { IContractorPortfolio } from '@common/api/services/contractor';
 import { formatNumber } from '@common/utils';
 
+import noPhoto from '@assets/common/noPhoto.jpg';
+
 import { Avatar, Descriptions, Image, Watermark } from 'antd';
 
 import { FaUser } from 'react-icons/fa';
 
 import styles from './Card.module.scss';
 
-const Card = ({ data }: { data?: IContractorPortfolio }) => {
+const PortfolioCard = ({ data }: { data?: IContractorPortfolio }) => {
   const [restDesc, setRestDesc] = useState(false);
   return (
     <div className={styles.card}>
@@ -32,9 +34,13 @@ const Card = ({ data }: { data?: IContractorPortfolio }) => {
                 // eslint-disable-next-line react/no-array-index-key
                 <SwiperSlide key={index}>
                   <Image.PreviewGroup items={data?.gallery?.split(',')}>
-                    <Watermark content="Ремостар">
-                      <Image src={image} className={styles.galleryImage} />
-                    </Watermark>
+                    {data?.gallery ? (
+                      <Watermark content="Ремостар">
+                        <Image src={image} className={styles.galleryImage} />
+                      </Watermark>
+                    ) : (
+                      <Image src={noPhoto} className={styles.galleryImage} />
+                    )}
                   </Image.PreviewGroup>
                 </SwiperSlide>
               );
@@ -78,4 +84,4 @@ const Card = ({ data }: { data?: IContractorPortfolio }) => {
   );
 };
 
-export default Card;
+export default PortfolioCard;

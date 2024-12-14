@@ -15,18 +15,22 @@ interface IInputNumberProps extends InputNumberProps {
 }
 
 const InputNumber = forwardRef<HTMLInputElement, IInputNumberProps>(
-  ({ label, error, labelClassName, isRequired = false, type = 'text', ...restProps }, ref) => {
+  (
+    { label, error, labelClassName, size, isRequired = false, type = 'text', ...restProps },
+    ref,
+  ) => {
     const field = useMemo(
       () => (
         <UIInputNumber
           type={type}
           ref={ref}
           status={error && 'error'}
+          size={size ?? 'large'}
           className={`inputNumber ${styles.inputNumber} ${error && styles.error}`}
           {...restProps}
         />
       ),
-      [type, ref, error, restProps],
+      [type, ref, error, size, restProps],
     );
 
     if (label) {

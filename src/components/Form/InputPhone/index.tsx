@@ -18,7 +18,7 @@ interface IPhoneProps extends InputProps {
 }
 
 const InputPhone = forwardRef<InputRef, IPhoneProps>(
-  ({ className, error, isRequired = false, label, inputField, ...restProps }, ref) => {
+  ({ className, error, size, isRequired = false, label, inputField, ...restProps }, ref) => {
     const field = useMemo(
       () => (
         <InputMask
@@ -44,13 +44,14 @@ const InputPhone = forwardRef<InputRef, IPhoneProps>(
             className={`inputPhone ${className}  ${styles.input}`}
             type="tel"
             inputMode="numeric"
+            size={size ?? 'large'}
             autoComplete="tel"
             maxLength={18}
             {...restProps}
           />
         </InputMask>
       ),
-      [inputField, ref, className, restProps],
+      [inputField, ref, size, className, restProps],
     );
 
     if (label) {

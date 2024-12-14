@@ -1,0 +1,6 @@
+@import '/src/styles/variables.scss';
+@import '../Form.scss';
+
+.textarea {
+  @include ui-field;
+}

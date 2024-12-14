@@ -1,10 +1,9 @@
 import { Skeleton, Title } from '@components';
 
 import { IContractorServices } from '@common/api/services/contractor';
+import { ServiceItem } from '@common/components';
 
 import { Empty } from 'antd';
-
-import ServiceItem from './components/ServiceItem';
 
 import styles from './Services.module.scss';
 

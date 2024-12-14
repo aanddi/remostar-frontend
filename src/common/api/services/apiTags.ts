@@ -6,13 +6,23 @@ enum ApiTags {
   GET_USER_PROFILE = 'get_user_profile',
   GET_MY_TENDERS = 'get_my_tenders',
   GET_INFO_TENDER = 'get_info_tender',
+  GET_CONTRACTOR_INFO = 'get_contractor_info',
+  GET_SERVICE = 'get_service',
+  GET_PORTFOLIO = 'get_portfolio',
 
   CREATE_TENDER = 'create_tender',
+  CREATE_SERVICE_CONTRACTOR = 'create_portfolio_contractor',
+  CREATE_PORTFOLIO_CONTRACTOR = 'create_portfolio_contractor',
 
   EDIT_PROFILE_USER = 'edit_profile_user',
   EDIT_TENDER = 'edit_tender',
+  EDIT_INFO_CONTRACTOR = 'edit_info_contractor',
+  EDIT_SERVICE_CONTRACTOR = 'edit_service_contractor',
+  EDIT_PORTFOLIO_CONTRACTOR = 'edit_portfolio_contractor',
 
   DELETE_TENDER = 'delete_tender',
+  DELETE_SERVICE_CONTRACTOR = 'delete_service_contractor',
+  DELETE_PORTFOLIO_CONTRACTOR = 'delete_portfolio_contractor',
 }
 
 export default ApiTags;

@@ -1,0 +1,14 @@
+@import '/src/styles/variables.scss';
+@import '../Form.scss';
+
+.textareaWrapper {
+  &.ant-input-outlined.ant-input-status-error,
+  &.ant-input-outlined.ant-input-status-error:focus-within,
+  &.ant-input-outlined.ant-input-status-error:hover {
+    border-color: $required-fields !important;
+  }
+
+  &.ant-input-outlined {
+    @include focus-within;
+  }
+}

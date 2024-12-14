@@ -51,6 +51,8 @@
   }
 
   .desc {
+    overflow: hidden;
+    word-break: break-word;
     .title {
       font-weight: 700;
       margin-bottom: 4px;

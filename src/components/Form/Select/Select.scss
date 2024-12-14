@@ -12,7 +12,6 @@
 .select {
   background-color: $blue-light;
   border: 1px solid darken($blue-light, 3%) !important;
-  height: 56px;
   font-size: 16px !important;
   border-radius: 7px !important;
 
@@ -28,7 +27,7 @@
   }
 
   .ant-select-selection-item {
-    padding: 16px 0px 0px 15px !important;
+    padding: 0 0px 0px 11px !important;
   }
 
   &:hover {

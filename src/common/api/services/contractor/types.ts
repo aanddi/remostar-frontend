@@ -127,6 +127,62 @@ interface IContractorProfile {
   portfolio: IContractorPortfolio[];
 }
 
+interface IResponseContractorInfo {
+  id: number;
+  createdAt: string;
+  updateAt: string;
+  legalName: string;
+  name: string;
+  veryfi: boolean;
+  typeCompany: string;
+  pathLogo: string;
+  mainCity: string;
+  adress: string;
+  citys: string;
+  countEmployees: number;
+  phone: string;
+  email: string;
+  cite: string;
+  inn: string;
+  descCompany: string;
+  tags: string;
+  services: IContractorServices[];
+  portfolio: IContractorPortfolio[];
+}
+
+interface IEditContractorInfo {
+  legalName: string;
+  name: string;
+  typeCompany: string;
+  mainCity: string;
+  adress: string;
+  countEmployees: number;
+  phone: string;
+  email: string;
+  inn: string;
+  descCompany: string;
+}
+
+interface IActionServices {
+  servicesName: string;
+  servicesDesc: string;
+  servicesUnit: string;
+  servicesSalary: number;
+}
+
+interface IActionPortfolio {
+  name: string;
+  type: string;
+  rooms: number;
+  category: string;
+  footage: number;
+  budget: number;
+  time: string;
+  desc: string;
+  gallery: string;
+  author: string;
+}
+
 export type {
   IRibbonContractorResponse,
   IRibbonContractorItem,
@@ -138,4 +194,8 @@ export type {
   IContractorServices,
   IContractorReviews,
   IContractorPortfolio,
+  IEditContractorInfo,
+  IActionServices,
+  IResponseContractorInfo,
+  IActionPortfolio,
 };

@@ -19,7 +19,7 @@ interface ISelectProps extends SelectProps {
 }
 
 const Select = forwardRef<BaseSelectRef, ISelectProps>(
-  ({ className, label, isRequired = false, error, ...restProps }, ref) => {
+  ({ className, label, size, isRequired = false, error, ...restProps }, ref) => {
     const select = useMemo(
       () => (
         <UISelect
@@ -27,12 +27,13 @@ const Select = forwardRef<BaseSelectRef, ISelectProps>(
           suffixIcon={<ArrowDown size={20} />}
           ref={ref}
           variant="filled"
+          size={size ?? 'large'}
           status={error && 'error'}
           popupClassName="dropdown"
           {...restProps}
         />
       ),
-      [className, error, ref, restProps],
+      [className, error, ref, size, restProps],
     );
 
     if (label) {

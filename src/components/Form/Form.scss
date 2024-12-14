@@ -1,10 +1,6 @@
-// TODO: сделать миксин под размеры полей
-
 @mixin ui-field {
   background-color: $blue-light;
   border-color: darken($blue-light, 3%);
-  height: 56px;
-  padding: 20px 15px 5px 15px;
   font-size: 16px !important;
   border-radius: 7px !important;
 

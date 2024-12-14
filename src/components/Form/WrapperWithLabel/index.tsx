@@ -30,7 +30,7 @@ const WrapperWithLabel = ({
     >
       <label
         htmlFor={name}
-        className={`${styles.label} ${error && styles.error} ${!isFocused && !value && styles.unactive} ${isRequired && styles.required}`}
+        className={`${styles.label} ${error && styles.error} ${isRequired && styles.required}`}
       >
         {label}
       </label>

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { Input, InputNumber, Select, Title } from '@components';
+import { Input, InputNumber, Select, Textarea, Title } from '@components';
 
 import {
   useCreateTender,
@@ -176,14 +176,24 @@ const TenderModal = ({
                 name="desc"
                 control={control}
                 rules={{ required: 'Это обязательное поле' }}
-                render={({ field }) => <Input label="Описание" isRequired {...field} />}
+                render={({ field }) => (
+                  <Textarea
+                    autoSize={{ minRows: 2, maxRows: 10 }}
+                    label="Описание"
+                    isRequired
+                    {...field}
+                  />
+                )}
               />
               <Controller
                 name="gallery"
                 control={control}
-                rules={{ required: 'Это обязательное поле' }}
                 render={({ field }) => (
-                  <Input label="Фото (ссылки через запятую)" isRequired {...field} />
+                  <Textarea
+                    autoSize={{ minRows: 2, maxRows: 10 }}
+                    label="Фото (ссылки через запятую)"
+                    {...field}
+                  />
                 )}
               />
             </Flex>

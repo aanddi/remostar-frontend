@@ -49,13 +49,9 @@ const ProfileMenu = ({ openModal, handleOpenModal, handleCloseModal }: IProfileM
   return (
     <div className={styles.menu} ref={ref}>
       <div className={styles.actions}>
-        <Link to="/favorites">
-          <Heart size={25} className={styles.actionsIcon} />
-        </Link>
+        <Heart size={25} className={styles.actionsIcon} />
         <Badge count={0}>
-          <Link to="/chats">
-            <MessageCircle size={25} className={styles.actionsIcon} />
-          </Link>
+          <MessageCircle size={25} className={styles.actionsIcon} />
         </Badge>
         <div className={styles.avatar}>
           <Avatar
@@ -85,9 +81,9 @@ const ProfileMenu = ({ openModal, handleOpenModal, handleCloseModal }: IProfileM
                 <Link to="/company" className={styles.item}>
                   Моя компания
                 </Link>
-                <Link to="/employees" className={styles.item}>
+                {/* <Link to="/employees" className={styles.item}>
                   Сотрудники
-                </Link>
+                </Link> */}
               </>
             )}
             {isEmployee && (

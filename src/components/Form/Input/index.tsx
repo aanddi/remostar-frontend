@@ -15,19 +15,22 @@ interface IInputProps extends InputProps {
 }
 
 const Input = forwardRef<InputRef, IInputProps>(
-  ({ label, error, labelClassName, isRequired = false, type = 'text', ...restProps }, ref) => {
+  (
+    { label, error, labelClassName, size, isRequired = false, type = 'text', ...restProps },
+    ref,
+  ) => {
     const field = useMemo(
       () => (
         <UIInput
-          // allowClear={{ clearIcon: <IoCloseCircle size={17} /> }}
           type={type}
           ref={ref}
           status={error && 'error'}
+          size={size ?? 'large'}
           className={`inputWrapper ${styles.input} ${error && styles.error}`}
           {...restProps}
         />
       ),
-      [type, ref, error, restProps],
+      [type, ref, error, size, restProps],
     );
 
     if (label) {
