@@ -7,8 +7,6 @@ import { Button } from '@components';
 import { IContractorPortfolio } from '@common/api/services/contractor';
 import { formatNumber } from '@common/utils';
 
-import noPhoto from '@assets/common/noPhoto.jpg';
-
 import { Avatar, Descriptions, Image, Watermark } from 'antd';
 
 import { FaUser } from 'react-icons/fa';
@@ -29,22 +27,27 @@ const PortfolioCard = ({ data }: { data?: IContractorPortfolio }) => {
             navigation
             modules={[Pagination, Navigation]}
           >
-            {data?.gallery?.split(',').map((image, index) => {
-              return (
-                // eslint-disable-next-line react/no-array-index-key
-                <SwiperSlide key={index}>
-                  <Image.PreviewGroup items={data?.gallery?.split(',')}>
-                    {data?.gallery ? (
+            {data?.gallery &&
+              data?.gallery?.split(',').map((image, index) => {
+                return (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <SwiperSlide key={index}>
+                    <Image.PreviewGroup items={data?.gallery?.split(',') ?? []}>
                       <Watermark content="Ремостар">
                         <Image src={image} className={styles.galleryImage} />
                       </Watermark>
-                    ) : (
-                      <Image src={noPhoto} className={styles.galleryImage} />
-                    )}
-                  </Image.PreviewGroup>
-                </SwiperSlide>
-              );
-            })}
+                    </Image.PreviewGroup>
+                  </SwiperSlide>
+                );
+              })}
+            {data?.gallery === null && (
+              <SwiperSlide>
+                <Image
+                  src="https://cdn1.ozone.ru/s3/multimedia-1-z/6980409107.jpg"
+                  className={styles.galleryImage}
+                />
+              </SwiperSlide>
+            )}
           </Swiper>
         </div>
         <div className={styles.content}>

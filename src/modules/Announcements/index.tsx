@@ -29,16 +29,18 @@ const Announcements = () => {
           </Button>
         </Flex>
       </div>
-      <Ribbon listCount={tenders?.length}>
+      <Ribbon listCount={tenders?.length} classNameList={styles.ribbon}>
         {!isFetching && !tenders?.length ? (
           <Empty description="Тендеры не найдены" />
         ) : (
           <>
-            {isFetching &&
-              [...Array(3)].map((_, index) => {
-                // eslint-disable-next-line react/no-array-index-key
-                return <Skeleton key={index} width="100%" height="300px" />;
-              })}
+            <Flex gap={16} vertical>
+              {isFetching &&
+                [...Array(3)].map((_, index) => {
+                  // eslint-disable-next-line react/no-array-index-key
+                  return <Skeleton key={index} width="100%" height="300px" />;
+                })}
+            </Flex>
 
             <Flex vertical style={{ marginTop: '16px' }} gap={32}>
               {tenders?.map((tender) => {

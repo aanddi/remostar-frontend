@@ -38,7 +38,7 @@ const ContractorsCard = ({ data }: IRibbonProps) => {
             <div className={styles.logo}>
               <Avatar
                 size={110}
-                src={data.pathLogo ? data.pathLogo : 'src/assets/Contractors/default-avatar.png'}
+                src="https://static.tildacdn.com/tild3865-3065-4436-a138-323766306537/BuildersLabourer_Ico.png"
               />
             </div>
             <div className={styles.info}>

@@ -9,8 +9,6 @@ import { ITendersRibbon } from '@common/api/services/tenders';
 import { Heart, Map, MessageReport } from '@common/icon';
 import { formatNumber } from '@common/utils';
 
-import noPhoto from '@assets/common/noPhoto.jpg';
-
 import { Image as AntdImage, Avatar, Tooltip, Watermark } from 'antd';
 
 import styles from './AnnouncementCard.module.scss';
@@ -40,22 +38,27 @@ const AnnouncementCard = ({ data }: { data: ITendersRibbon }) => {
               navigation
               modules={[Pagination, Navigation]}
             >
-              {data?.gallery?.split(',').map((image, index) => {
-                return (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <SwiperSlide key={index}>
-                    <AntdImage.PreviewGroup items={data?.gallery?.split(',')}>
-                      {data?.gallery ? (
+              {data?.gallery &&
+                data?.gallery?.split(',').map((image, index) => {
+                  return (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <SwiperSlide key={index}>
+                      <AntdImage.PreviewGroup items={data?.gallery?.split(',') ?? []}>
                         <Watermark content="Ремостар">
                           <Image src={image} className={styles.galleryImage} />
                         </Watermark>
-                      ) : (
-                        <Image src={noPhoto} className={styles.galleryImage} />
-                      )}
-                    </AntdImage.PreviewGroup>
-                  </SwiperSlide>
-                );
-              })}
+                      </AntdImage.PreviewGroup>
+                    </SwiperSlide>
+                  );
+                })}
+              {data?.gallery === null && (
+                <SwiperSlide>
+                  <Image
+                    src="https://cdn1.ozone.ru/s3/multimedia-1-z/6980409107.jpg"
+                    className={styles.galleryImage}
+                  />
+                </SwiperSlide>
+              )}
             </Swiper>
           </div>
 
