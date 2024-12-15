@@ -13,3 +13,4 @@ export { default as Employees } from './Employees';
 export { default as Chats } from './Chats';
 export { default as Favorites } from './Favorites';
 export { default as MyCompany } from './MyCompany';
+export { default as MyReviews } from './MyReviews';

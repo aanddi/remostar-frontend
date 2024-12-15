@@ -6,7 +6,7 @@ import { IReviewStatistics } from '@common/api/services/contractor';
 
 import styles from './Statistics.module.scss';
 
-const Statistics = ({ data }: { data: IReviewStatistics }) => {
+const Statistics = ({ data, count }: { data: IReviewStatistics; count?: number }) => {
   const statistics = useMemo(
     () => (
       <div className={styles.statistics}>
@@ -16,7 +16,7 @@ const Statistics = ({ data }: { data: IReviewStatistics }) => {
               <div className={styles.grade}>{data?.gradeTotal}</div>
               <Rate disabled allowHalf value={data?.gradeTotal} />
             </div>
-            <div className={styles.totalCount}>На основе {data?.gradeTotal} отзывов</div>
+            <div className={styles.totalCount}>На основе {count ?? 0} отзывов</div>
           </div>
           <div className={styles.progress}>
             <Progress
@@ -60,7 +60,7 @@ const Statistics = ({ data }: { data: IReviewStatistics }) => {
         </div>
       </div>
     ),
-    [data],
+    [data, count],
   );
 
   return statistics;

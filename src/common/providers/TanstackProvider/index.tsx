@@ -14,7 +14,7 @@ export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 2,
-      refetchOnMount: false,
+      // refetchOnMount: false,
       refetchInterval: false,
       refetchOnWindowFocus: false,
     },

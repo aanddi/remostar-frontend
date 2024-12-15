@@ -8,6 +8,8 @@ export { default as ContractorsCard } from './ContractorsCard';
 export { default as TenderCard } from './TenderCard';
 export { default as ServiceItem } from './ServiceItem';
 export { default as PortfolioCard } from './PortfolioCard';
+export { default as ReviewModal } from './ReviewModal';
+export { default as ReviewCard } from './ReviewCard';
 
 export { default as Search } from './Search';
 export { default as Ribbon } from './Ribbon';

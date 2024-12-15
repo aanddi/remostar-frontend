@@ -8,13 +8,13 @@ import {
   useEditTender,
   useGetTenderInfo,
 } from '@common/api/services/tenders/hooks';
+import { typeWork } from '@common/config/dictionary';
 import { useAuth } from '@common/hooks';
 import { formatNumber, parserNumber } from '@common/utils';
 
 import { Flex, Modal } from 'antd';
 
 import './TenderModal.scss';
-import { type } from './constans';
 import { IModalTenderProps } from './types';
 
 const TenderModal = ({
@@ -133,7 +133,7 @@ const TenderModal = ({
                   control={control}
                   rules={{ required: 'Это обязательное поле' }}
                   render={({ field }) => (
-                    <Select label="Тип ремонта" options={type} isRequired {...field} />
+                    <Select label="Тип ремонта" options={typeWork} isRequired {...field} />
                   )}
                 />
                 <Controller

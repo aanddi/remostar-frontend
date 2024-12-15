@@ -92,9 +92,14 @@ const ProfileMenu = ({ openModal, handleOpenModal, handleCloseModal }: IProfileM
               </Link>
             )}
             {isOwner && (
-              <Link to="/my-tenders" className={styles.item}>
-                Тендеры
-              </Link>
+              <>
+                <Link to="/my-tenders" className={styles.item}>
+                  Тендеры
+                </Link>
+                <Link to="/my-reviews" className={styles.item}>
+                  Отзывы
+                </Link>
+              </>
             )}
             <Link to="/objects" className={styles.item}>
               Объекты

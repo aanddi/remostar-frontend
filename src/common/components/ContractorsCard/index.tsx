@@ -5,7 +5,6 @@ import { Button } from '@components';
 
 import { IRibbonContractorItem } from '@common/api/services/contractor';
 import { Verify } from '@common/components';
-import { useRoles } from '@common/hooks';
 import { Briefcase, Heart, Map, Message, MessageReport, Star } from '@common/icon';
 
 import { Avatar, Tag, Tooltip, Typography } from 'antd';
@@ -18,7 +17,6 @@ interface IRibbonProps {
 
 const ContractorsCard = ({ data }: IRibbonProps) => {
   const navigate = useNavigate();
-  const { isOwner } = useRoles();
 
   const card = useMemo(
     () => (
@@ -58,7 +56,7 @@ const ContractorsCard = ({ data }: IRibbonProps) => {
                       to={`/contractor/${data?.id}/?view=reviews`}
                       className={styles.commentLink}
                     >
-                      {data?.reviewCount === 0 ? 'Нет отзывов' : data?.reviewCount}
+                      {data?.reviewCount === 0 ? 'Нет отзывов' : `${data?.reviewCount} отзыва`}
                     </Link>
                   </div>
                 </div>
@@ -112,12 +110,11 @@ const ContractorsCard = ({ data }: IRibbonProps) => {
             <Button type="primary" onClick={() => navigate(`/contractor/${data?.id}`)}>
               Подробнее
             </Button>
-            {isOwner && <Button type="default">Предложить заказ</Button>}
           </div>
         </div>
       </div>
     ),
-    [data, isOwner, navigate],
+    [data, navigate],
   );
 
   return card;

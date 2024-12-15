@@ -21,6 +21,7 @@ const EmployeesPage = lazy(() => import('./Employees'));
 const ChatsPage = lazy(() => import('./Chats'));
 const FavoritesPage = lazy(() => import('./Favorites'));
 const MyCompanyPage = lazy(() => import('./MyCompany'));
+const MyReviewsPage = lazy(() => import('./MyReviews'));
 
 const NotFoundPage = lazy(() => import('./NotFound'));
 const ForbiddenPage = lazy(() => import('./Forbidden'));
@@ -142,6 +143,16 @@ const Router = () => {
         <AppLayout>
           <AuthProvider protectionUser={[Roles.Employee]}>
             <AnnouncementsPage />
+          </AuthProvider>
+        </AppLayout>
+      ),
+    },
+    {
+      path: '/my-reviews',
+      element: (
+        <AppLayout>
+          <AuthProvider protectionUser={[Roles.Employee]}>
+            <MyReviewsPage />
           </AuthProvider>
         </AppLayout>
       ),
