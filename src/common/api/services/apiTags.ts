@@ -12,11 +12,15 @@ enum ApiTags {
   GET_REVIEWS_PROFILE = 'get_reviews_profile',
   GET_REVIEW_BY_ID_PROFILE = 'get_reviews_by_id_profile',
   GET_CHECK_REVIEW = 'get_check_reviews',
+  GET_OBJECTS_LIST = 'get_objects_list',
+  GET_OBJECT_INFO = 'get_object_info',
+  GET_OWNERS_LIST = 'get_owners_list',
 
   CREATE_TENDER = 'create_tender',
   CREATE_SERVICE_CONTRACTOR = 'create_portfolio_contractor',
   CREATE_PORTFOLIO_CONTRACTOR = 'create_portfolio_contractor',
   CREATE_REVIEW = 'create_review',
+  CREATE_OBJECT = 'create_object',
 
   EDIT_PROFILE_USER = 'edit_profile_user',
   EDIT_TENDER = 'edit_tender',
@@ -24,6 +28,7 @@ enum ApiTags {
   EDIT_SERVICE_CONTRACTOR = 'edit_service_contractor',
   EDIT_PORTFOLIO_CONTRACTOR = 'edit_portfolio_contractor',
   EDIT_REVIEW = 'edit_review',
+  EDIT_OBJECT_INFO = 'edit_object_info',
 
   DELETE_TENDER = 'delete_tender',
   DELETE_SERVICE_CONTRACTOR = 'delete_service_contractor',

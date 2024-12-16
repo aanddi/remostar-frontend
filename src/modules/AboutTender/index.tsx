@@ -38,7 +38,10 @@ const AboutTender = () => {
             <div className={styles.date}>Опубликовано: {formatDate(tender?.createdAt)}</div>
             <div className={styles.content}>
               <div className={styles.body}>
-                <GalleryThumbs data={tender?.gallery.split(',') ?? []} className={styles.slider} />
+                <GalleryThumbs
+                  data={tender?.gallery ? tender?.gallery.split(',') : []}
+                  className={styles.slider}
+                />
                 <Info data={tender} />
                 <Description data={tender?.desc} />
                 <Location address={tender?.address!} />

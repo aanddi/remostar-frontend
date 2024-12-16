@@ -6,22 +6,28 @@ import { AppLayout, AuthLayout } from '@common/components';
 import FullScreenLoader from '@common/components/FullScreenLoader';
 import AuthProvider from '@common/providers/AuthProtectedProvider';
 
-const SearchOwnersPage = lazy(() => import('./SearchOwners'));
-const SearchContractorsPage = lazy(() => import('./SearchContractors'));
-const AboutPlatformPage = lazy(() => import('./AboutPlatform'));
-const ProfileContractorsPage = lazy(() => import('./ProfileContractor'));
-const AboutTenderPage = lazy(() => import('./AboutTender'));
+const SearchOwnersPage = lazy(() => import('@modules/SearchOwners'));
+const SearchContractorsPage = lazy(() => import('@modules/SearchContractors'));
+const AboutPlatformPage = lazy(() => import('@modules/AboutPlatform'));
+const ProfileContractorsPage = lazy(() => import('@modules/ProfileContractor'));
+const AboutTenderPage = lazy(() => import('@modules/AboutTender'));
 
-const RegistrationPage = lazy(() => import('./Registration'));
+const RegistrationPage = lazy(() => import('@modules/Registration'));
 
-const ProfilePage = lazy(() => import('./Profile'));
-const ObjectsPage = lazy(() => import('./Objects'));
-const AnnouncementsPage = lazy(() => import('./Announcements'));
-const EmployeesPage = lazy(() => import('./Employees'));
-const ChatsPage = lazy(() => import('./Chats'));
-const FavoritesPage = lazy(() => import('./Favorites'));
-const MyCompanyPage = lazy(() => import('./MyCompany'));
-const MyReviewsPage = lazy(() => import('./MyReviews'));
+const ProfilePage = lazy(() => import('@modules/Profile'));
+const MyTendersPage = lazy(() => import('@modules/MyTenders'));
+const EmployeesPage = lazy(() => import('@modules/Employees'));
+const ChatsPage = lazy(() => import('@modules/Chats'));
+const FavoritesPage = lazy(() => import('@modules/Favorites'));
+const MyCompanyPage = lazy(() => import('@modules/MyCompany'));
+const MyReviewsPage = lazy(() => import('@modules/MyReviews'));
+
+const ObjectsListPage = lazy(() => import('@modules/ObjectsList'));
+const ObjectDashboardPage = lazy(() => import('@modules/ObjectDashboard'));
+const ObjectInfoPage = lazy(() => import('@modules/ObjectInfo'));
+const ObjectFilesPage = lazy(() => import('@modules/ObjectsFiles'));
+const ObjectStepsPage = lazy(() => import('@modules/ObjectSteps'));
+const ObjectStepInfoPage = lazy(() => import('@modules/ObjectStepInfo'));
 
 const NotFoundPage = lazy(() => import('./NotFound'));
 const ForbiddenPage = lazy(() => import('./Forbidden'));
@@ -132,7 +138,57 @@ const Router = () => {
       element: (
         <AppLayout>
           <AuthProvider>
-            <ObjectsPage />
+            <ObjectsListPage />
+          </AuthProvider>
+        </AppLayout>
+      ),
+    },
+    {
+      path: '/objects/:id/dashboard',
+      element: (
+        <AppLayout>
+          <AuthProvider>
+            <ObjectDashboardPage />
+          </AuthProvider>
+        </AppLayout>
+      ),
+    },
+    {
+      path: '/objects/:id/info',
+      element: (
+        <AppLayout>
+          <AuthProvider>
+            <ObjectInfoPage />
+          </AuthProvider>
+        </AppLayout>
+      ),
+    },
+    {
+      path: '/objects/:id/files',
+      element: (
+        <AppLayout>
+          <AuthProvider>
+            <ObjectFilesPage />
+          </AuthProvider>
+        </AppLayout>
+      ),
+    },
+    {
+      path: '/objects/:id/steps',
+      element: (
+        <AppLayout>
+          <AuthProvider>
+            <ObjectStepsPage />
+          </AuthProvider>
+        </AppLayout>
+      ),
+    },
+    {
+      path: '/objects/:id/steps/:step',
+      element: (
+        <AppLayout>
+          <AuthProvider>
+            <ObjectStepInfoPage />
           </AuthProvider>
         </AppLayout>
       ),
@@ -142,7 +198,7 @@ const Router = () => {
       element: (
         <AppLayout>
           <AuthProvider protectionUser={[Roles.Employee]}>
-            <AnnouncementsPage />
+            <MyTendersPage />
           </AuthProvider>
         </AppLayout>
       ),

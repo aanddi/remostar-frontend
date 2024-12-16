@@ -15,6 +15,7 @@ interface IGalleryProps {
   watermark?: boolean;
   watermarkText?: string;
   className?: string;
+  classNameSwiper?: string;
 }
 
 const GalleryThumbs = ({
@@ -22,13 +23,14 @@ const GalleryThumbs = ({
   className,
   watermarkText = 'Ремостар',
   watermark = true,
+  classNameSwiper,
 }: IGalleryProps) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
   return (
     <div className={`${styles.gallery} ${className}`}>
       <Swiper
-        className={styles.viewGallery}
+        className={`${styles.viewGallery} ${classNameSwiper}`}
         loop
         spaceBetween={10}
         navigation
@@ -52,6 +54,25 @@ const GalleryThumbs = ({
             </SwiperSlide>
           );
         })}
+        {data.length === 0 && (
+          <SwiperSlide className={styles.viewGalleryItem}>
+            <Image.PreviewGroup items={data}>
+              {watermark ? (
+                <Watermark content={watermarkText}>
+                  <ImageCustom
+                    className={styles.viewGalleryImage}
+                    src="https://cdn1.ozone.ru/s3/multimedia-1-z/6980409107.jpg"
+                  />
+                </Watermark>
+              ) : (
+                <ImageCustom
+                  className={styles.viewGalleryImage}
+                  src="https://cdn1.ozone.ru/s3/multimedia-1-z/6980409107.jpg"
+                />
+              )}
+            </Image.PreviewGroup>
+          </SwiperSlide>
+        )}
       </Swiper>
       <Swiper
         className={`galleryThumbs ${styles.galleryThumbs}`}

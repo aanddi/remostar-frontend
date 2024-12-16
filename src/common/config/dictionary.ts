@@ -30,3 +30,26 @@ export const typeWork = [
     label: 'Текущий',
   },
 ];
+
+export const statusWork = [
+  {
+    value: 1,
+    label: 'Планирование ремонта',
+  },
+  {
+    value: 2,
+    label: 'Черновые работы',
+  },
+  {
+    value: 3,
+    label: 'Чистовая отделка',
+  },
+  {
+    value: 4,
+    label: 'Завершающие работы',
+  },
+  {
+    value: 5,
+    label: 'Завершен',
+  },
+];

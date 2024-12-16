@@ -10,6 +10,8 @@ export { default as ServiceItem } from './ServiceItem';
 export { default as PortfolioCard } from './PortfolioCard';
 export { default as ReviewModal } from './ReviewModal';
 export { default as ReviewCard } from './ReviewCard';
+export { default as ObjectCard } from './ObjectCard';
+export { default as ObjectModal } from './ObjectModal';
 
 export { default as Search } from './Search';
 export { default as Ribbon } from './Ribbon';
