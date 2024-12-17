@@ -6,3 +6,4 @@ export { default as getLocalStorage } from './localStorage/getLocalStorage';
 export { default as formatDate } from './formatter/date';
 export { formatNumber, parserNumber } from './formatter/format-number';
 export { default as formatStatusObject } from './formatter/statusObject';
+export { default as formatContentSize } from './formatter/contentSize';

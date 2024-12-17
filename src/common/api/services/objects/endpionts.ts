@@ -1,6 +1,13 @@
 import apiInstance from '@common/api/instance';
 
-import { IActionsObject, ICreateReport, IGetReports, IObjectInfo, IObjectList } from './types';
+import {
+  IActionsObject,
+  ICreateReport,
+  IFile,
+  IGetReports,
+  IObjectInfo,
+  IObjectList,
+} from './types';
 
 const getObjectsOwner = async (userId: string) => {
   const response = await apiInstance.get<IObjectList[]>(`/objects/list/owner/${userId}`);
@@ -59,6 +66,31 @@ const getListEmployees = async (contractorId: string) => {
   return response.data;
 };
 
+const uploadFile = async (objectId: number, formData: FormData) => {
+  const response = await apiInstance.post<{ id: number; name: string }>(
+    `/objects/${objectId}/file/upload`,
+    formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    },
+  );
+  return response.data;
+};
+
+const getFileContent = async (objectId: number) => {
+  const response = await apiInstance.get<Blob>(`/objects/file/${objectId}/content`, {
+    responseType: 'blob',
+  });
+  return response.data;
+};
+
+const getListFiles = async (objectId: number) => {
+  const response = await apiInstance.get<IFile[]>(`/objects/${objectId}/files/list`);
+  return response.data;
+};
+
 export {
   getObjectsOwner,
   getObjectContractor,
@@ -70,4 +102,7 @@ export {
   getReportsForStatus,
   createReport,
   getListEmployees,
+  uploadFile,
+  getFileContent,
+  getListFiles,
 };

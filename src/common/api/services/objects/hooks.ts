@@ -6,12 +6,15 @@ import {
   createReport,
   editObject,
   editStatusObject,
+  getFileContent,
   getListEmployees,
+  getListFiles,
   getObjectContractor,
   getObjectInfo,
   getObjectsOwner,
   getOwnersList,
   getReportsForStatus,
+  uploadFile,
 } from './endpionts';
 import { IActionsObject, ICreateReport } from './types';
 
@@ -134,6 +137,41 @@ const useCreateReport = (
   });
 };
 
+const useUploadFile = (objectId: number) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: [ApiTags.UPLOAD_FILE],
+    mutationFn: (formData: FormData) => uploadFile(objectId, formData),
+    async onSuccess(data) {
+      await queryClient.invalidateQueries({ queryKey: [ApiTags.GET_FILES_LIST] });
+      toast.success(`Файл «${data.name}» загружен добавлен`);
+    },
+  });
+};
+
+const useListFiles = (objectId: number) => {
+  return useQuery({
+    queryKey: [ApiTags.GET_FILES_LIST],
+    queryFn: () => getListFiles(objectId),
+  });
+};
+
+const useDownloadFile = () => {
+  return useMutation({
+    mutationKey: [ApiTags.GET_FILE_CONTENT],
+    mutationFn: async (payload: { fileId: number; fileName: string }) =>
+      getFileContent(payload.fileId),
+    onSuccess(data, { fileName }) {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(data);
+      link.download = fileName;
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(link.href);
+    },
+  });
+};
+
 export {
   useObjectList,
   useCreateObject,
@@ -144,4 +182,7 @@ export {
   useGetReports,
   useCreateReport,
   useEmployeesList,
+  useUploadFile,
+  useListFiles,
+  useDownloadFile,
 };

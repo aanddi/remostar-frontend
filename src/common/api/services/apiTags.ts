@@ -17,6 +17,8 @@ enum ApiTags {
   GET_OWNERS_LIST = 'get_owners_list',
   GET_EMPLOYEES_LIST = 'get_employees_list',
   GET_REPORTS = 'get_reports',
+  GET_FILES_LIST = 'get_files_list',
+  GET_FILE_CONTENT = 'get_file_content',
 
   CREATE_TENDER = 'create_tender',
   CREATE_SERVICE_CONTRACTOR = 'create_portfolio_contractor',
@@ -37,6 +39,8 @@ enum ApiTags {
   DELETE_SERVICE_CONTRACTOR = 'delete_service_contractor',
   DELETE_PORTFOLIO_CONTRACTOR = 'delete_portfolio_contractor',
   DELETE_REVIEW = 'delete_review',
+
+  UPLOAD_FILE = 'upload_file',
 }
 
 export default ApiTags;

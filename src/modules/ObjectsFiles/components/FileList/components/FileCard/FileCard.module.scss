@@ -1,0 +1,69 @@
+.file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px;
+  transition: all 0.4s ease;
+  border-radius: 10px;
+  color: inherit !important;
+  box-shadow: 0px 4px 35px -4px rgba(34, 60, 80, 0.15);
+  overflow: hidden;
+
+  .iconItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lighten(#8b96a3, 33%);
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 5px;
+
+    .icon {
+      color: #8b96a3;
+      font-size: 28px;
+    }
+  }
+
+  &:hover {
+    background-color: lighten(#8b96a3, 33%);
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+    font-size: 16px;
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      gap: 4px;
+
+      .fileName {
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .desc {
+        display: flex;
+        gap: 4px;
+        font-size: 12px;
+        color: #8b96a3;
+
+        .contentSize {
+          &::after {
+            content: '•';
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -54,6 +54,11 @@ const ObjectInfo = () => {
                 <Descriptions.Item label="Последнее редактирование">
                   {formatDate(object?.updateAt, 'DD.MM.YYYY HH:mm')}
                 </Descriptions.Item>
+                <Descriptions.Item label="Подрядчик">{object?.contractor.name}</Descriptions.Item>
+                <Descriptions.Item label="Контакты собственника">{`${object?.user.phone ?? ''} ${object?.user.email ?? ''}`}</Descriptions.Item>
+                <Descriptions.Item label="Собственник">
+                  {object?.user.surname} {object?.user.name} {object?.user.patronymic}
+                </Descriptions.Item>
                 <Descriptions.Item label="Адрес">{object?.address}</Descriptions.Item>
                 <Descriptions.Item label="Этаж">{object?.floor}</Descriptions.Item>
                 <Descriptions.Item label="Кол-во комнат">{object?.rooms}</Descriptions.Item>

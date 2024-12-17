@@ -58,6 +58,8 @@ interface IObjectInfo {
     name: string;
     surname: string;
     patronymic: string;
+    phone: string;
+    email: string;
   };
 }
 
@@ -82,4 +84,11 @@ interface IGetReports {
   author: string;
 }
 
-export type { IObjectList, IActionsObject, IObjectInfo, ICreateReport, IGetReports };
+interface IFile {
+  id: number;
+  createdAt: string;
+  name: string;
+  size: number;
+}
+
+export type { IObjectList, IActionsObject, IObjectInfo, ICreateReport, IGetReports, IFile };
