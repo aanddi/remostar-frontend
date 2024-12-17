@@ -115,7 +115,12 @@ const useGetReports = (objectId: number, statusId: number) => {
   });
 };
 
-const useCreateReport = (objectId: number, statusId: number, handleCancel: () => void) => {
+const useCreateReport = (
+  objectId: number,
+  statusId: number,
+  handleCancel: () => void,
+  reset: () => void,
+) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: [ApiTags.CREATE_REPORT],
@@ -123,6 +128,7 @@ const useCreateReport = (objectId: number, statusId: number, handleCancel: () =>
     async onSuccess() {
       await queryClient.invalidateQueries({ queryKey: [ApiTags.GET_REPORTS] });
       handleCancel();
+      reset();
       toast.success('Отчет добавлен');
     },
   });

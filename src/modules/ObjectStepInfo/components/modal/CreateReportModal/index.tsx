@@ -20,10 +20,11 @@ const CreateReportModal = ({ isModalOpen, handleCancel }: ICreateReportModalProp
   const {
     control,
     handleSubmit,
+    reset,
     formState: { isValid },
   } = useForm<ICreateReport>({ defaultValues, mode: 'onChange' });
 
-  const { mutate: createReport, isPending } = useCreateReport(+id!, +step!, handleCancel);
+  const { mutate: createReport, isPending } = useCreateReport(+id!, +step!, handleCancel, reset);
 
   const handleOkModal = (data: ICreateReport) => {
     createReport(data);
