@@ -1,0 +1,124 @@
+@import '/src/styles/variables.scss';
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0px 4px 35px -4px rgba(34, 60, 80, 0.15);
+  max-width: 100vw;
+
+  .wrapper {
+    display: flex;
+    gap: 40px;
+    padding: 32px;
+    position: relative;
+
+    @media (max-width: 995px) {
+      flex-direction: column;
+      gap: 24px;
+
+      padding: 30px;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    width: 100%;
+  }
+
+  .contentWrapper {
+    display: flex;
+    flex: 1 1 100%;
+    flex-direction: column;
+  }
+
+  .gallery {
+    width: 500px;
+
+    @media (max-width: 995px) {
+      min-width: 100% !important;
+    }
+
+    @media (max-width: 595px) {
+      width: 150px;
+    }
+
+    .galleryItem {
+      height: 350px;
+
+      @media (max-width: 995px) {
+        height: 450px;
+        min-width: 100%;
+      }
+
+      @media (max-width: 600px) {
+        height: 300px;
+      }
+
+      @media (max-width: 400px) {
+        height: 200px;
+      }
+    }
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    @media (max-width: 450px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+  }
+
+  .date {
+    margin: 16px 0;
+  }
+
+  .desc {
+    margin-bottom: 16px;
+    font-size: 15px;
+    line-height: 150%;
+    text-align: justify;
+    overflow: hidden;
+    word-break: break-word;
+
+    overflow: hidden;
+    word-break: break-word;
+
+    .subtitle {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .rest {
+      padding: 0 !important;
+      min-width: max-content;
+      color: $primary;
+      text-decoration: underline;
+      padding-left: 4px;
+
+      &:hover {
+        color: $primary;
+        text-decoration: none;
+        cursor: pointer;
+        background-color: transparent !important;
+      }
+    }
+
+    .fullText {
+      max-height: auto;
+      overflow: auto;
+    }
+
+    .text {
+      max-height: 70px;
+      overflow: hidden;
+    }
+  }
+}

@@ -50,7 +50,7 @@ const ObjectDashboard = () => {
                 src="https://static.tildacdn.com/tild3865-3065-4436-a138-323766306537/BuildersLabourer_Ico.png"
               />
               <Link className={styles.contractorName} to={`/contractor/${object?.contractor.id}`}>
-                {object?.contractor.legalName}
+                {object?.contractor.name}
               </Link>
             </Flex>
             <Flex className={styles.user} align="center" gap={16}>

@@ -15,12 +15,15 @@ enum ApiTags {
   GET_OBJECTS_LIST = 'get_objects_list',
   GET_OBJECT_INFO = 'get_object_info',
   GET_OWNERS_LIST = 'get_owners_list',
+  GET_EMPLOYEES_LIST = 'get_employees_list',
+  GET_REPORTS = 'get_reports',
 
   CREATE_TENDER = 'create_tender',
   CREATE_SERVICE_CONTRACTOR = 'create_portfolio_contractor',
   CREATE_PORTFOLIO_CONTRACTOR = 'create_portfolio_contractor',
   CREATE_REVIEW = 'create_review',
   CREATE_OBJECT = 'create_object',
+  CREATE_REPORT = 'create_report',
 
   EDIT_PROFILE_USER = 'edit_profile_user',
   EDIT_TENDER = 'edit_tender',

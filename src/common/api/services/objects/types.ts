@@ -51,7 +51,7 @@ interface IObjectInfo {
   contractorsId: number;
   contractor: {
     id: number;
-    legalName: string;
+    name: string;
   };
   user: {
     id: string;
@@ -61,4 +61,25 @@ interface IObjectInfo {
   };
 }
 
-export type { IObjectList, IActionsObject, IObjectInfo };
+interface ICreateReport {
+  gallery: string;
+  title: string;
+  desc: string;
+  result: string;
+  author: string;
+}
+
+interface IGetReports {
+  id: number;
+  createdAt: string;
+  updateAt: string;
+  step: number;
+  objectsId: number;
+  gallery: string;
+  title: string;
+  desc: string;
+  result: string;
+  author: string;
+}
+
+export type { IObjectList, IActionsObject, IObjectInfo, ICreateReport, IGetReports };

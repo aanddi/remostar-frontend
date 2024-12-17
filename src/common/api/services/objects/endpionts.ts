@@ -1,6 +1,6 @@
 import apiInstance from '@common/api/instance';
 
-import { IActionsObject, IObjectInfo, IObjectList } from './types';
+import { IActionsObject, ICreateReport, IGetReports, IObjectInfo, IObjectList } from './types';
 
 const getObjectsOwner = async (userId: string) => {
   const response = await apiInstance.get<IObjectList[]>(`/objects/list/owner/${userId}`);
@@ -37,6 +37,28 @@ const getObjectInfo = async (objectId: number) => {
   return response.data;
 };
 
+const getReportsForStatus = async (objectId: number, statusId: number) => {
+  const response = await apiInstance.get<IGetReports[]>(
+    `/objects/reports?objectId=${objectId}&statusId=${statusId}`,
+  );
+  return response.data;
+};
+
+const createReport = async (objectId: number, statusId: number, body: ICreateReport) => {
+  const response = await apiInstance.post(
+    `/objects/report/${objectId}/create?statusId=${statusId}`,
+    body,
+  );
+  return response.data;
+};
+
+const getListEmployees = async (contractorId: string) => {
+  const response = await apiInstance.get<{ id: number; fullName: string }[]>(
+    `/objects/list/employees/${contractorId}`,
+  );
+  return response.data;
+};
+
 export {
   getObjectsOwner,
   getObjectContractor,
@@ -45,4 +67,7 @@ export {
   editStatusObject,
   getOwnersList,
   getObjectInfo,
+  getReportsForStatus,
+  createReport,
+  getListEmployees,
 };

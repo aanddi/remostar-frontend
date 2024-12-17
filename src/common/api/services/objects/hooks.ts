@@ -3,14 +3,17 @@ import toast from 'react-hot-toast';
 
 import {
   createObject,
+  createReport,
   editObject,
   editStatusObject,
+  getListEmployees,
   getObjectContractor,
   getObjectInfo,
   getObjectsOwner,
   getOwnersList,
+  getReportsForStatus,
 } from './endpionts';
-import { IActionsObject } from './types';
+import { IActionsObject, ICreateReport } from './types';
 
 import ApiTags from '../apiTags';
 
@@ -67,6 +70,22 @@ const useOwnersList = (isModalOpen: boolean) => {
   });
 };
 
+const useEmployeesList = (contractorId: string, isModalOpen: boolean) => {
+  return useQuery({
+    queryKey: [ApiTags.GET_EMPLOYEES_LIST],
+    queryFn: () => getListEmployees(contractorId),
+    select: (data) => {
+      return data.map((employee) => {
+        return {
+          value: employee.fullName,
+          label: `${employee.fullName} - ${employee.id}`,
+        };
+      });
+    },
+    enabled: isModalOpen,
+  });
+};
+
 const useObjectInfo = (objectId: number) => {
   return useQuery({
     queryKey: [ApiTags.GET_OBJECT_INFO, objectId],
@@ -89,6 +108,26 @@ const useEditStatus = (objectId: number, setIsVisibleSelect: (state: boolean) =>
   });
 };
 
+const useGetReports = (objectId: number, statusId: number) => {
+  return useQuery({
+    queryKey: [ApiTags.GET_REPORTS, statusId],
+    queryFn: () => getReportsForStatus(objectId, statusId),
+  });
+};
+
+const useCreateReport = (objectId: number, statusId: number, handleCancel: () => void) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: [ApiTags.CREATE_REPORT],
+    mutationFn: (data: ICreateReport) => createReport(objectId, statusId, data),
+    async onSuccess() {
+      await queryClient.invalidateQueries({ queryKey: [ApiTags.GET_REPORTS] });
+      handleCancel();
+      toast.success('Отчет добавлен');
+    },
+  });
+};
+
 export {
   useObjectList,
   useCreateObject,
@@ -96,4 +135,7 @@ export {
   useObjectInfo,
   useEditObject,
   useEditStatus,
+  useGetReports,
+  useCreateReport,
+  useEmployeesList,
 };
