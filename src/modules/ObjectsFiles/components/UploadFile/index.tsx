@@ -1,4 +1,4 @@
-import { DownloadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -45,7 +45,7 @@ const UploadFile = () => {
           type="primary"
           ghost
           size="large"
-          icon={<DownloadOutlined />}
+          icon={<UploadOutlined />}
           loading={isPending}
           style={{ width: '100%' }}
         >
