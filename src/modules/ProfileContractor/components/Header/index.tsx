@@ -1,8 +1,7 @@
-import { Breadcrumb, Button, Image, Skeleton } from '@components';
+import { Breadcrumb, Image, Skeleton } from '@components';
 
 import { IContractorInfo } from '@common/api/services/contractor';
 import { Verify } from '@common/components';
-import { Add } from '@common/icon';
 import { formatDate } from '@common/utils';
 
 import styles from './Header.module.scss';
@@ -42,12 +41,6 @@ const Header = ({ data, loading }: { data?: IContractorInfo; loading: boolean })
                 </div>
               </div>
             )}
-            <div className={styles.actions}>
-              <Button type="primary">Написать</Button>
-              <Button className={styles.button} icon={<Add size={18} />}>
-                Добавить в избранное
-              </Button>
-            </div>
           </div>
           <div className={styles.logo}>
             <Image

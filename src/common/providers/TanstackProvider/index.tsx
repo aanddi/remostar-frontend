@@ -13,8 +13,7 @@ import { notification } from 'antd';
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 2,
-      // refetchOnMount: false,
+      retry: 0,
       refetchInterval: false,
       refetchOnWindowFocus: false,
     },

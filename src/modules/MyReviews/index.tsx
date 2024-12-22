@@ -9,7 +9,7 @@ import { Empty, Flex } from 'antd';
 import Actions from './components/Actions';
 
 const MyReviews = () => {
-  const user = useAuth();
+  const { user } = useAuth();
 
   const { data: reviews, isLoading } = useListReviewsUser(user?.id!);
 

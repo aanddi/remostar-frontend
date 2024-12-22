@@ -1,8 +1,10 @@
-const deleteAuthTokens = () => {
-  const accessToken = localStorage.removeItem('accessToken');
-  const refreshToken = localStorage.removeItem('refreshToken');
+import Cookies from 'js-cookie';
 
-  return { accessToken, refreshToken };
+import { Tokens } from '@common/api/services/auth/types/user.type';
+
+const deleteAuthTokens = () => {
+  Cookies.remove(Tokens.AccessToken);
+  Cookies.remove(Tokens.RefreshToken);
 };
 
 export default deleteAuthTokens;

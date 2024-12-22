@@ -1,5 +1,10 @@
 import ITokens from './tokens.type';
 
+enum Tokens {
+  AccessToken = 'accessToken',
+  RefreshToken = 'refreshToken',
+}
+
 enum Roles {
   Owner = 'OWNER',
   Employee = 'EMPLOYEE',
@@ -11,7 +16,7 @@ enum RolesEmployee {
   Brigadier = 'BRIGADIER',
 }
 
-interface IRole {
+export interface IRole {
   userRole: {
     roleId: number;
     roleName: string;
@@ -24,7 +29,7 @@ interface IRole {
   };
 }
 
-interface IEmployee {
+export interface IEmployee {
   employeeId: string;
   contractorId: string;
 }
@@ -34,6 +39,10 @@ interface User {
   pathImage: string;
   name: string;
   surname: string;
+  patronymic: string;
+  phone: string;
+  email: string;
+  gender: string;
   employee?: IEmployee;
   roles: IRole;
 }
@@ -42,6 +51,6 @@ interface IAuthResponse extends ITokens {
   user: User;
 }
 
-export { Roles, RolesEmployee };
+export { Roles, RolesEmployee, Tokens };
 
 export type { IAuthResponse, User };

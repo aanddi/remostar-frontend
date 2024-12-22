@@ -24,7 +24,7 @@ const PortfolioModal = ({
   actionType,
   portfolioId,
 }: IPortfolioModalProps) => {
-  const user = useAuth();
+  const { user } = useAuth();
 
   const isEditType = actionType === 'edit';
   const isCreateType = actionType === 'create';

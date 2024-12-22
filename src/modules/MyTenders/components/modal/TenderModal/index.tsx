@@ -26,7 +26,7 @@ const TenderModal = ({
   const isEditType = typeActions === 'edit';
   const isCreateType = typeActions === 'create';
 
-  const user = useAuth();
+  const { user } = useAuth();
 
   const {
     control,

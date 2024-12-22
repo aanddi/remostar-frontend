@@ -12,7 +12,7 @@ import { defaultValues } from './constnst';
 import { ICreateReportModalProps } from './types';
 
 const CreateReportModal = ({ isModalOpen, handleCancel }: ICreateReportModalProps) => {
-  const user = useAuth();
+  const { user } = useAuth();
   const { id, step } = useParams();
 
   const { data: employees } = useEmployeesList(user?.employee?.contractorId!, isModalOpen);

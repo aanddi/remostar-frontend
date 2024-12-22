@@ -1,4 +1,3 @@
-import { Heart, MessageCircle } from 'lucide-react';
 import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -6,7 +5,7 @@ import { useAppDispatch, useAuth, useRoles } from '@common/hooks';
 
 import { logoutUser } from '@store/slices/user.slice';
 
-import { Avatar, Badge } from 'antd';
+import { Avatar } from 'antd';
 
 import styles from './ProfileMenu.module.scss';
 
@@ -21,7 +20,7 @@ const ProfileMenu = ({ openModal, handleOpenModal, handleCloseModal }: IProfileM
   const location = useLocation();
   const dispatch = useAppDispatch();
 
-  const user = useAuth();
+  const { user } = useAuth();
   const { isAdmin, isEmployee, isOwner, userRole, employeeRole } = useRoles();
 
   const handleLogoutUser = () => {
@@ -49,10 +48,6 @@ const ProfileMenu = ({ openModal, handleOpenModal, handleCloseModal }: IProfileM
   return (
     <div className={styles.menu} ref={ref}>
       <div className={styles.actions}>
-        <Heart size={25} className={styles.actionsIcon} />
-        <Badge count={0}>
-          <MessageCircle size={25} className={styles.actionsIcon} />
-        </Badge>
         <div className={styles.avatar}>
           <Avatar
             onClick={() => (openModal ? handleCloseModal() : handleOpenModal())}

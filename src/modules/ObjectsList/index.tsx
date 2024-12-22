@@ -9,7 +9,7 @@ import { Empty, Flex } from 'antd';
 import CreateObject from './components/Create';
 
 const Objects = () => {
-  const user = useAuth();
+  const { user } = useAuth();
   const { isOwner } = useRoles();
   const { isEmployee } = useRoles();
 

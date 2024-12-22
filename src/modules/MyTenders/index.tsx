@@ -15,7 +15,7 @@ import styles from './MyTenders.module.scss';
 
 const MyTenders = () => {
   const { isOpenModal, handleCloseModal, handleOpenModal } = useModal();
-  const user = useAuth();
+  const { user } = useAuth();
 
   const { data: tenders, isFetching } = useGetMyTenders(user?.id!);
 

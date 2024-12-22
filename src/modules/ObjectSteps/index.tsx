@@ -94,7 +94,6 @@ const ObjectSteps = () => {
         labelPlacement="horizontal"
         direction="vertical"
         items={items}
-        initial={1}
       />
     </div>
   );

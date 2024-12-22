@@ -6,10 +6,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Button, Image } from '@components';
 
 import { ITendersRibbon } from '@common/api/services/tenders';
-import { Heart, Map, MessageReport } from '@common/icon';
+import { Map } from '@common/icon';
 import { formatNumber } from '@common/utils';
 
-import { Image as AntdImage, Avatar, Tooltip, Watermark } from 'antd';
+import { Image as AntdImage, Avatar, Watermark } from 'antd';
 
 import styles from './AnnouncementCard.module.scss';
 
@@ -19,16 +19,6 @@ const AnnouncementCard = ({ data }: { data: ITendersRibbon }) => {
     () => (
       <div className={styles.card}>
         <div className={styles.wrapper}>
-          <div className={styles.actionsButton}>
-            <div className={styles.actionItem}>
-              <Heart className={styles.favorite} size={19} />
-            </div>
-            <Tooltip title="Сообщить о нарушении">
-              <div className={styles.actionItem}>
-                <MessageReport size={22} />
-              </div>
-            </Tooltip>
-          </div>
           <div className={styles.gallery}>
             <Swiper
               loop
@@ -87,7 +77,6 @@ const AnnouncementCard = ({ data }: { data: ITendersRibbon }) => {
                 <Button type="primary" onClick={() => navigate(`/tender/${data.id}`)}>
                   Подробнее
                 </Button>
-                <Button type="default">Сделать предложение</Button>
               </div>
             </div>
           </div>

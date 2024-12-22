@@ -18,7 +18,7 @@ const Info = ({ contractorId, info, loading }: IInfoProps) => {
     control,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<IEditContractorInfo>({
     defaultValues: info,
     mode: 'onChange',
@@ -176,7 +176,13 @@ const Info = ({ contractorId, info, loading }: IInfoProps) => {
             <Button size="large" onClick={onReset}>
               Отменить
             </Button>
-            <Button size="large" type="primary" htmlType="submit" loading={isPending}>
+            <Button
+              size="large"
+              type="primary"
+              htmlType="submit"
+              loading={isPending}
+              disabled={!isDirty}
+            >
               Сохранить
             </Button>
           </Flex>

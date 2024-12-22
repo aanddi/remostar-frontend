@@ -13,7 +13,7 @@ const AuthProvider = ({ children, protectionUser, protectionEmployee }: IAuthPro
   const location = useLocation();
   const { handleOpenModal: handleModalLogin } = useModalLogin();
 
-  const user = useAuth();
+  const { user } = useAuth();
   const { userRole, employeeRole } = useRoles();
 
   if (!user) {

@@ -21,7 +21,7 @@ const AppHeader = () => {
   const location = useLocation();
 
   const { city } = useAppSelector((state) => state.citys);
-  const user = useAuth();
+  const { user } = useAuth();
 
   const { handleOpenModal: handleModalLogin } = useModalLogin();
   const { handleOpenModal: handleModalCity } = useModalCitys();

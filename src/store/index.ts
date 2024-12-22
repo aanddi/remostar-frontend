@@ -21,6 +21,7 @@ const rootReducer = combineReducers({
 
 const persistConfig = {
   key: 'remostar',
+  blacklist: ['user'],
   storage,
 };
 

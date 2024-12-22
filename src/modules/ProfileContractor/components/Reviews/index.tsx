@@ -5,7 +5,7 @@ import { Button, Title } from '@components';
 import { IContractorReviews } from '@common/api/services/contractor';
 import { useCheckReviewUser } from '@common/api/services/reviews';
 import { ReviewCard, ReviewModal } from '@common/components';
-import { useAuth, useModal } from '@common/hooks';
+import { useAuth, useModal, useRoles } from '@common/hooks';
 import { Add } from '@common/icon';
 import { formatDate } from '@common/utils';
 
@@ -17,7 +17,8 @@ import styles from './Reviews.module.scss';
 
 const Reviews = ({ data, loading }: { data?: IContractorReviews; loading: boolean }) => {
   const { id } = useParams();
-  const user = useAuth();
+  const { user } = useAuth();
+  const { isOwner } = useRoles();
 
   const { isOpenModal, handleCloseModal, handleOpenModal } = useModal();
 
@@ -32,7 +33,7 @@ const Reviews = ({ data, loading }: { data?: IContractorReviews; loading: boolea
             <Tag color="green">Вы оставили отзыв {formatDate(checkReview.createAt)}</Tag>
           </Link>
         )}
-        {user && !checkReview?.createAt && (
+        {isOwner && !checkReview?.createAt && (
           <Button
             type="primary"
             icon={<Add size={18} />}

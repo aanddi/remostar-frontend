@@ -1,7 +1,5 @@
-import { Button } from '@components';
-
 import { ITender } from '@common/api/services/tenders';
-import { Heart, Map, MessageReport } from '@common/icon';
+import { Map } from '@common/icon';
 import { formatNumber } from '@common/utils';
 
 import { Avatar } from 'antd';
@@ -28,12 +26,9 @@ const Aside = ({ data, className }: { data?: ITender; className: string }) => {
                 {data?.user.surname} {data?.user.name} {data?.user.patronymic}
               </div>
             </div>
-            <Button type="primary" size="large" className={styles.button}>
-              Сделать предложение
-            </Button>
           </div>
         </div>
-        <div className={styles.actions}>
+        {/* <div className={styles.actions}>
           <div className={styles.item}>
             <Heart className={styles.favorite} size={19} />
             <span>Избранное</span>
@@ -42,7 +37,7 @@ const Aside = ({ data, className }: { data?: ITender; className: string }) => {
             <MessageReport className={styles.icon} size={22} />
             <span>Пожаловаться</span>
           </div>
-        </div>
+        </div> */}
       </div>
     </aside>
   );

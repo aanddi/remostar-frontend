@@ -1,38 +1,48 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import Cookies from 'js-cookie';
 
-import { IAuthResponse, User } from '@common/api/services/auth/types/user.type';
-import { deleteAuthTokens, setAuthTokens } from '@common/utils';
-import getLocalStorage from '@common/utils/localStorage/getLocalStorage';
+import { Tokens } from '@common/api/services/auth/types/user.type';
+import { IUserProfile } from '@common/api/services/user';
+import { deleteAuthTokens } from '@common/utils';
 
 export interface IInitialState {
-  user: User | null;
+  user: IUserProfile | null;
+  isAuthorized: boolean;
 }
 
 const initialState: IInitialState = {
-  user: getLocalStorage('user'),
+  user: null,
+  isAuthorized: !!Cookies.get(Tokens.AccessToken) && !!Cookies.get(Tokens.RefreshToken),
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    loginUser: (_state, action: PayloadAction<IAuthResponse>) => {
-      setAuthTokens(action.payload.accessToken, action.payload.refreshToken);
+    authorized: (_state, action: PayloadAction<boolean>) => {
       return {
         ..._state,
-        user: action.payload.user,
+        isAuthorized: action.payload,
+      };
+    },
+
+    loginUser: (_state, action: PayloadAction<IUserProfile>) => {
+      return {
+        ..._state,
+        user: action.payload,
       };
     },
 
     logoutUser: () => {
       deleteAuthTokens();
+      localStorage.removeItem('userProfile');
       return {
-        user: null,
+        ...initialState,
       };
     },
   },
 });
 
-export const { loginUser, logoutUser } = userSlice.actions;
+export const { loginUser, logoutUser, authorized } = userSlice.actions;
 
 export default userSlice.reducer;

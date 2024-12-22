@@ -1,6 +1,10 @@
+import Cookies from 'js-cookie';
+
+import { Tokens } from '@common/api/services/auth/types/user.type';
+
 const getAuthTokens = () => {
-  const accessToken = localStorage.getItem('accessToken');
-  const refreshToken = localStorage.getItem('refreshToken');
+  const accessToken = Cookies.get(Tokens.AccessToken);
+  const refreshToken = Cookies.get(Tokens.RefreshToken);
 
   return { accessToken, refreshToken };
 };

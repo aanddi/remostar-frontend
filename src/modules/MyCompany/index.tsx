@@ -12,7 +12,7 @@ import Services from './components/Services';
 import styles from './MyCompany.module.scss';
 
 const MyCompany = () => {
-  const user = useAuth();
+  const { user } = useAuth();
 
   const { data: contractor, isLoading } = useContractorInfo(user?.employee?.contractorId!);
 

@@ -5,9 +5,9 @@ import { Button } from '@components';
 
 import { IRibbonContractorItem } from '@common/api/services/contractor';
 import { Verify } from '@common/components';
-import { Briefcase, Heart, Map, Message, MessageReport, Star } from '@common/icon';
+import { Briefcase, Map, Message, Star } from '@common/icon';
 
-import { Avatar, Tag, Tooltip, Typography } from 'antd';
+import { Avatar, Tag, Typography } from 'antd';
 
 import styles from './ContractorsCard.module.scss';
 
@@ -22,16 +22,6 @@ const ContractorsCard = ({ data }: IRibbonProps) => {
     () => (
       <div className={styles.card}>
         <div className={styles.wrapper}>
-          <div className={styles.actions}>
-            <div className={styles.actionItem}>
-              <Heart className={styles.favorite} size={19} />
-            </div>
-            <Tooltip title="Сообщить о нарушении">
-              <div className={styles.actionItem}>
-                <MessageReport size={22} />
-              </div>
-            </Tooltip>
-          </div>
           <div className={styles.header}>
             <div className={styles.logo}>
               <Avatar

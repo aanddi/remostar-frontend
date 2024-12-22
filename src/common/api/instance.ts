@@ -1,8 +1,10 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import Cookies from 'js-cookie';
 
-import { deleteAuthTokens, getAuthTokens, setAuthTokens } from '@common/utils';
+import { getAuthTokens, setAuthTokens } from '@common/utils';
 
 import { AuthServices } from './services/auth';
+import { Tokens } from './services/auth/types/user.type';
 
 const apiInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -27,28 +29,38 @@ apiInstance.interceptors.request.use(
 );
 
 apiInstance.interceptors.response.use(
-  (config) => config,
-  async (error) => {
-    const originalRequest = error.config;
+  (response: AxiosResponse) => {
+    return response;
+  },
+  async (error: AxiosError<{ message: string }>) => {
+    const originalRequest = error.config as AxiosRequestConfig & { retry?: boolean };
 
-    if (error.response.status === 401 && error.config && !error.config.isRetry) {
-      originalRequest.isRetry = true;
+    if (
+      error.response?.status === 401 &&
+      error.response.data.message === 'Unauthorized' &&
+      originalRequest.retry !== true
+    ) {
       try {
+        originalRequest.retry = true;
         const { refreshToken } = getAuthTokens();
-        const response = await AuthServices.getNewTokens(refreshToken);
-        deleteAuthTokens();
-        setAuthTokens(response.accessToken, response.refreshToken);
-        // обновление юзера ????
-      } catch (err: any) {
-        console.error('error', err);
-        if (err.response.status === 401 || err.response.status === 400) {
-          deleteAuthTokens();
-          localStorage.removeItem('user');
+
+        if (refreshToken) {
+          const response = await AuthServices.getNewTokens(refreshToken);
+
+          if (response.accessToken && response.refreshToken) {
+            setAuthTokens(response.accessToken, response.refreshToken);
+          }
+
+          return await apiInstance(originalRequest);
         }
+      } catch (err) {
+        console.log(err);
+        Cookies.remove(Tokens.AccessToken);
+        Cookies.remove(Tokens.RefreshToken);
+        localStorage.removeItem('userProfile');
+        window.location.href = '/';
+        return Promise.reject(error);
       }
-      return apiInstance.request(originalRequest).catch(() => {
-        throw error;
-      });
     }
     return Promise.reject(error);
   },

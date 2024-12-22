@@ -7,19 +7,20 @@ import {
   IRegisterContractors,
   IRegisterOwner,
 } from '@common/api/services/auth/types/register.type';
-import { IAuthResponse } from '@common/api/services/auth/types/user.type';
+import ITokens from '@common/api/services/auth/types/tokens.type';
 import { useAppDispatch } from '@common/hooks';
+import { setAuthTokens } from '@common/utils';
 
-import { loginUser } from '@store/slices/user.slice';
+import { authorized } from '@store/slices/user.slice';
 
 const useRegisterOwner = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  const dispatch = useAppDispatch();
   return useMutation({
     mutationFn: async (data: IRegisterOwner) => AuthServices.registerOwner(data),
-    onSuccess: (data: IAuthResponse) => {
-      dispatch(loginUser(data));
+    onSuccess: (data: ITokens) => {
+      setAuthTokens(data.accessToken, data.refreshToken);
+      dispatch(authorized(true));
       navigate('/profile');
     },
     onError: (err: any) => {
@@ -29,13 +30,13 @@ const useRegisterOwner = () => {
 };
 
 const useRegisterContactor = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  const dispatch = useAppDispatch();
   return useMutation({
     mutationFn: async (data: IRegisterContractors) => AuthServices.registerContactor(data),
-    onSuccess: (data: IAuthResponse) => {
-      dispatch(loginUser(data));
+    onSuccess: (data: ITokens) => {
+      setAuthTokens(data.accessToken, data.refreshToken);
+      dispatch(authorized(true));
       navigate('/company');
     },
     onError: (err: any) => {

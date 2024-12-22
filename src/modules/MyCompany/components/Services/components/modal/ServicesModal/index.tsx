@@ -22,7 +22,7 @@ const ServicesModal = ({
   actionType,
   serviceId,
 }: IServicesModalProps) => {
-  const user = useAuth();
+  const { user } = useAuth();
 
   const isEditType = actionType === 'edit';
   const isCreateType = actionType === 'create';
