@@ -88,6 +88,9 @@
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-svgr": "^4.2.0"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-musl": "4.9.5"
+  },
   "lint-staged": {
     "*.(ts|tsx)": [
       "npm run format"
