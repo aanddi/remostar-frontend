@@ -92,7 +92,7 @@ const TenderModal = ({
               rules={{ required: 'Это обязательное поле' }}
               render={({ field }) => (
                 <InputNumber
-                  label="Бюджет"
+                  label="Бюджет (руб)"
                   style={{ width: '100%' }}
                   formatter={(valueInput) => formatNumber(valueInput as number)}
                   parser={(valueInput) => parserNumber(valueInput) as unknown as string}
@@ -148,14 +148,14 @@ const TenderModal = ({
                   name="footage"
                   control={control}
                   rules={{ required: 'Это обязательное поле' }}
-                  render={({ field }) => <InputNumber label="Площадь" isRequired {...field} />}
+                  render={({ field }) => <InputNumber label="Площадь (м²)" isRequired {...field} />}
                 />
                 <Controller
                   name="squareKitchen"
                   control={control}
                   rules={{ required: 'Это обязательное поле' }}
                   render={({ field }) => (
-                    <InputNumber label="Площадь кухни" isRequired {...field} />
+                    <InputNumber label="Площадь кухни (м²)" isRequired {...field} />
                   )}
                 />
                 <Controller
@@ -163,7 +163,7 @@ const TenderModal = ({
                   control={control}
                   rules={{ required: 'Это обязательное поле' }}
                   render={({ field }) => (
-                    <InputNumber label="Жилая площадь" isRequired {...field} />
+                    <InputNumber label="Жилая площадь (м²)" isRequired {...field} />
                   )}
                 />
               </Flex>

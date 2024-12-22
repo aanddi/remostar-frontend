@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { Input, InputNumber } from '@components';
+import { Input, InputNumber, Textarea } from '@components';
 
 import { IActionServices } from '@common/api/services/contractor';
 import {
@@ -10,6 +10,7 @@ import {
   useServiceInfo,
 } from '@common/api/services/contractor/hooks';
 import { useAuth } from '@common/hooks';
+import { formatNumber, parserNumber } from '@common/utils';
 
 import { Flex, Modal, Skeleton, Typography } from 'antd';
 
@@ -90,21 +91,40 @@ const ServicesModal = ({
               name="servicesDesc"
               control={control}
               rules={{ required: 'Это обязательное поле' }}
-              render={({ field }) => <Input label="Описание" isRequired {...field} />}
+              render={({ field }) => (
+                <Textarea
+                  label="Описание"
+                  autoSize={{ minRows: 2, maxRows: 10 }}
+                  isRequired
+                  {...field}
+                />
+              )}
             />
             <Flex gap={16}>
               <Controller
                 name="servicesSalary"
                 control={control}
                 rules={{ required: 'Это обязательное поле' }}
-                render={({ field }) => <InputNumber label="Цена" isRequired {...field} />}
+                render={({ field }) => (
+                  <InputNumber
+                    label="Цена (руб.)"
+                    formatter={(valueInput) => formatNumber(valueInput as number)}
+                    parser={(valueInput) => parserNumber(valueInput) as unknown as string}
+                    isRequired
+                    {...field}
+                  />
+                )}
               />
               <Controller
                 name="servicesUnit"
                 control={control}
                 rules={{ required: 'Это обязательное поле' }}
                 render={({ field }) => (
-                  <Input label="Единица измерения за одну услугу" isRequired {...field} />
+                  <Input
+                    label="Единица измерения за одну услугу (шт., единица, м²)"
+                    isRequired
+                    {...field}
+                  />
                 )}
               />
             </Flex>

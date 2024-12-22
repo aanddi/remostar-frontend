@@ -10,7 +10,7 @@ const ServiceItem = ({ service }: { service: IContractorServices }) => (
         <div className={styles.desc}>{service.servicesDesc}</div>
       </div>
       <div className={styles.salary}>
-        от {service.servicesSalary} / {service.servicesUnit}
+        от {service.servicesSalary} руб. / {service.servicesUnit}
       </div>
     </div>
   </div>

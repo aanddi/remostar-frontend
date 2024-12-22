@@ -11,6 +11,8 @@ import { formatNumber } from '@common/utils';
 
 import { Image as AntdImage, Avatar, Watermark } from 'antd';
 
+import { FaUser } from 'react-icons/fa';
+
 import styles from './AnnouncementCard.module.scss';
 
 const AnnouncementCard = ({ data }: { data: ITendersRibbon }) => {
@@ -68,7 +70,7 @@ const AnnouncementCard = ({ data }: { data: ITendersRibbon }) => {
             </div>
             <div className={styles.footer}>
               <div className={styles.user}>
-                <Avatar size={40} src="src/assets/User/default-avatar.png" />
+                <Avatar size={40} icon={<FaUser />} />
                 <div className={styles.userAbout}>
                   <div className={styles.name}>{data?.user.name}</div>
                 </div>

@@ -39,9 +39,9 @@ const ModalLogin = ({ ...rest }) => {
             Зарегистрироваться
           </Link>
         </div>
-        <Link to="/" onClick={() => handleCloseModal()} className={styles.help}>
+        {/* <Link to="/" onClick={() => handleCloseModal()} className={styles.help}>
           Не могу войти
-        </Link>
+        </Link> */}
       </div>
     </Modal>
   );

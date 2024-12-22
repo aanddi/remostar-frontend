@@ -120,7 +120,7 @@ const Info = ({ contractorId, info, loading }: IInfoProps) => {
               rules={{ required: 'Это обязательное поле' }}
               render={({ field }) => (
                 <InputNumber
-                  label="Размер компании"
+                  label="Размер компании (чел.)"
                   isRequired
                   error={errors.countEmployees?.message}
                   {...field}
@@ -165,6 +165,7 @@ const Info = ({ contractorId, info, loading }: IInfoProps) => {
               render={({ field }) => (
                 <Textarea
                   label="Описание"
+                  autoSize={{ minRows: 2, maxRows: 10 }}
                   isRequired
                   error={errors.descCompany?.message}
                   {...field}
